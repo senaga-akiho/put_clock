@@ -2,6 +2,18 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:put_clock.xcodeproj">
+      location = "group:../put_clock">
+   </FileRef>
+   <FileRef
+      location = "group:..">
+   </FileRef>
+   <FileRef
+      location = "group:../put_clock">
+   </FileRef>
+   <FileRef
+      location = "group:../put_clock">
+   </FileRef>
+   <FileRef
+      location = "self:">
    </FileRef>
 </Workspace>
