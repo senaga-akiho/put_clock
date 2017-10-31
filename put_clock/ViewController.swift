@@ -36,7 +36,7 @@ class ViewController: UIViewController {
         let goActive = NotificationCenter.default
         goActive.addObserver(
             self,
-            selector: #selector(eventGet),
+            selector: #selector(callAvtive),
             name:NSNotification.Name.UIApplicationDidBecomeActive,
             object: nil)
         //バックグラウンドになった瞬間に呼び出す
@@ -46,14 +46,6 @@ class ViewController: UIViewController {
             selector: #selector(saveDate),
             name:NSNotification.Name.UIApplicationDidEnterBackground,
             object: nil)
-        //eventGet()
-        // 1秒ごとに「displayClock」を実行する
-        let timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(displayClock), userInfo: nil, repeats: true)
-        UIView.animate(withDuration: 1.0, delay: 0.0,
-                       options: UIViewAnimationOptions.repeat, animations: { () -> Void in
-                        self.time_label.alpha = 0.0
-        }, completion: nil)
-        timer.fire()    // 無くても動くけどこれが無いと初回の実行がラグる
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -108,15 +100,6 @@ class ViewController: UIViewController {
         date_label.textAlignment = .center
         date_label.layer.position = CGPoint(x: self.view.bounds.width/2,y: time_label.layer.position.y+self.view.bounds.height/10)
     }
-    /*
-     ユーザーデフォルトデータを保存
-     バックグラウンドになった時に呼び出される
-     */
-    @objc func saveDate()
-    {
-        print("保存！")
-        userDefaults.set(time_bool, forKey: "time_bool")
-    }
     
     /*
          アクセス権の表示
@@ -143,11 +126,8 @@ class ViewController: UIViewController {
     
     /*
      イベントの取得
-     アプリ起動時に呼べれる関数
      */
-    @objc func eventGet() {
-        time_switch.setOn(userDefaults.bool(forKey: "time_bool"),animated: false)
-        time_bool = time_switch.isOn
+    func eventGet() {
         // イベントストアのインスタンスメソッドで述語を生成.
         var predicate = NSPredicate()
         predicate = myEventStore.predicateForEvents(withStart: Date()-60*60*24,
@@ -166,13 +146,38 @@ class ViewController: UIViewController {
                 labelArray[w].layer.position = CGPoint(x: self.view.bounds.width/2,y: self.view.bounds.height*CGFloat(5+w)/8)
                 
                 print(i.title)
-//                print(i.startDate)
-//                print(i.endDate)
+                //                print(i.startDate)
+                //                print(i.endDate)
                 w+=1
             }
         }else{
             print("何もない")
         }
+    }
+    /*
+     ユーザーデフォルトデータを保存
+     バックグラウンドになった時に呼び出される
+     */
+    @objc func saveDate()
+    {
+        print("保存！")
+        userDefaults.set(time_bool, forKey: "time_bool")
+    }
+    /*
+     アプリ起動時に呼べれる関数
+     */
+    @objc func callAvtive() {
+        eventGet()
+        time_switch.setOn(userDefaults.bool(forKey: "time_bool"),animated: false)
+        time_bool = time_switch.isOn
+        // 1秒ごとに「displayClock」を実行する
+        let timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(displayClock), userInfo: nil, repeats: true)
+        time_label.alpha=1
+        UIView.animate(withDuration: 1.0, delay: 0.0,
+                       options: UIViewAnimationOptions.repeat, animations: { () -> Void in
+                        self.time_label.alpha = 0.0
+        }, completion: nil)
+        timer.fire()    // 無くても動くけどこれが無いと初回の実行がラグる
     }
 
 }
