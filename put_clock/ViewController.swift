@@ -19,6 +19,8 @@ class ViewController: UIViewController {
     
     var labelArray = [UILabel(), UILabel(), UILabel()]
     var time_bool:Bool = true
+    var display_width:CGFloat = 0.0
+    var display_height:CGFloat = 0.0
     private let myEventStore:EKEventStore = EKEventStore()
     // NSUserDefaultsインスタンスの生成
     let userDefaults = UserDefaults.standard
@@ -27,11 +29,13 @@ class ViewController: UIViewController {
      */
     override func viewDidLoad() {
         accessApplication()
+        display_width = self.view.bounds.width
+        display_height = self.view.bounds.height
         super.viewDidLoad()
         labelArray[0] = event1
         labelArray[1] = event2
         labelArray[2] = event3
-        time_switch.layer.position = CGPoint(x: self.view.bounds.width/2,y: self.view.bounds.height/2)
+        time_switch.layer.position = CGPoint(x: display_width/2,y: display_height/2)
         //アプリがアクティブになった瞬間に呼び出す
         let goActive = NotificationCenter.default
         goActive.addObserver(
@@ -89,7 +93,7 @@ class ViewController: UIViewController {
         time_label.text = displayTime
         time_label.sizeToFit()
         time_label.textAlignment = .center
-        time_label.layer.position = CGPoint(x: self.view.bounds.width/2,y: self.view.bounds.height/5)
+        time_label.layer.position = CGPoint(x: display_width/2,y: display_height/5)
         
         //日付を表示
         let date_formatter = DateFormatter()
@@ -98,7 +102,7 @@ class ViewController: UIViewController {
         date_label.text = displayDate
         date_label.sizeToFit()
         date_label.textAlignment = .center
-        date_label.layer.position = CGPoint(x: self.view.bounds.width/2,y: time_label.layer.position.y+self.view.bounds.height/10)
+        date_label.layer.position = CGPoint(x: display_width/2,y: time_label.layer.position.y+display_height/10)
     }
     
     /*
@@ -143,7 +147,7 @@ class ViewController: UIViewController {
                 labelArray[w].text = i.title
                 labelArray[w].sizeToFit()
                 labelArray[w].textAlignment = .center
-                labelArray[w].layer.position = CGPoint(x: self.view.bounds.width/2,y: self.view.bounds.height*CGFloat(5+w)/8)
+                labelArray[w].layer.position = CGPoint(x: display_width/2,y: display_height*CGFloat(5+w)/8)
                 
                 print(i.title)
                 //                print(i.startDate)
