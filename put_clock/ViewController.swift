@@ -39,7 +39,7 @@ class ViewController: UIViewController {
             selector: #selector(eventGet),
             name:NSNotification.Name.UIApplicationDidBecomeActive,
             object: nil)
-        
+        //バックグラウンドになった瞬間に呼び出す
         let goBackGround = NotificationCenter.default
         goBackGround.addObserver(
             self,
@@ -110,6 +110,7 @@ class ViewController: UIViewController {
     }
     /*
      ユーザーデフォルトデータを保存
+     バックグラウンドになった時に呼び出される
      */
     @objc func saveDate()
     {
