@@ -15,25 +15,38 @@ class ViewController: UIViewController {
     @IBOutlet weak var event1: UILabel!
     @IBOutlet weak var event2: UILabel!
     @IBOutlet weak var event3: UILabel!
-    var labelArray = [UILabel(), UILabel(), UILabel()]
-    private let myEventStore:EKEventStore = EKEventStore()
-    //var blinkLabelTimer = NSTimer()
+    @IBOutlet weak var time_switch: UISwitch!
     
+    var labelArray = [UILabel(), UILabel(), UILabel()]
+    var time_bool:Bool = true
+    private let myEventStore:EKEventStore = EKEventStore()
+    // NSUserDefaultsインスタンスの生成
+    let userDefaults = UserDefaults.standard
+    /*
+         一番最初に呼ばれる
+     */
     override func viewDidLoad() {
         accessApplication()
         super.viewDidLoad()
         labelArray[0] = event1
         labelArray[1] = event2
         labelArray[2] = event3
-        print("通る")
+        time_switch.layer.position = CGPoint(x: self.view.bounds.width/2,y: self.view.bounds.height/2)
         //アプリがアクティブになった瞬間に呼び出す
-        let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(
+        let goActive = NotificationCenter.default
+        goActive.addObserver(
             self,
             selector: #selector(eventGet),
             name:NSNotification.Name.UIApplicationDidBecomeActive,
             object: nil)
-        eventGet()
+        
+        let goBackGround = NotificationCenter.default
+        goBackGround.addObserver(
+            self,
+            selector: #selector(saveDate),
+            name:NSNotification.Name.UIApplicationDidEnterBackground,
+            object: nil)
+        //eventGet()
         // 1秒ごとに「displayClock」を実行する
         let timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(displayClock), userInfo: nil, repeats: true)
         UIView.animate(withDuration: 1.0, delay: 0.0,
@@ -47,11 +60,31 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    // 現在時刻を表示する処理
+    /*
+         スイッチの切り替え時
+     */
+    @IBAction func `switch`(_ sender: Any) {
+        if (sender as AnyObject).isOn {
+            print(time_bool)
+            time_bool=true
+        }else {
+            print(time_bool)
+            time_bool=false
+        }
+    }
+    
+        /*
+             時刻の表示
+         */
     @objc func displayClock() {
-        // 時間を表示
         let time_formatter = DateFormatter()
-        time_formatter.dateFormat = "HH:mm:ss"
+        
+        if(time_bool){
+            time_formatter.dateFormat = "HH:mm:ss"
+        }else{
+            time_formatter.dateFormat = "HH時mm分ss秒"
+        }
+        // 時間を表示
         var displayTime = time_formatter.string(from: Date())    // Date()だけで現在時刻を表す
         // 0から始まる時刻の場合は「 H:MM:SS」形式にする
         if displayTime.hasPrefix("0") {
@@ -75,7 +108,18 @@ class ViewController: UIViewController {
         date_label.textAlignment = .center
         date_label.layer.position = CGPoint(x: self.view.bounds.width/2,y: time_label.layer.position.y+self.view.bounds.height/10)
     }
-    // アクセス権申請
+    /*
+     ユーザーデフォルトデータを保存
+     */
+    @objc func saveDate()
+    {
+        print("保存！")
+        userDefaults.set(time_bool, forKey: "time_bool")
+    }
+    
+    /*
+         アクセス権の表示
+     */
     func accessApplication()
     {
         // カレンダー追加の権限ステータスを取得
@@ -97,19 +141,19 @@ class ViewController: UIViewController {
     }
     
     /*
-     Buttonが押されたときに呼ばれるメソッド.
+     イベントの取得
+     アプリ起動時に呼べれる関数
      */
     @objc func eventGet() {
-        print("通ってる")
+        time_switch.setOn(userDefaults.bool(forKey: "time_bool"),animated: false)
+        time_bool = time_switch.isOn
         // イベントストアのインスタンスメソッドで述語を生成.
         var predicate = NSPredicate()
-        // ユーザーの全てのカレンダーからフェッチせよ
         predicate = myEventStore.predicateForEvents(withStart: Date()-60*60*24,
                                                     end: Date()+60*60*24,
                                                     calendars: nil)
         // 述語にマッチする全てのイベントをフェッチ.
         let events = myEventStore.events(matching: predicate)
-        print(type(of: events))
         // イベントが見つかった.
         
         if !events.isEmpty {
