@@ -41,7 +41,7 @@ class ViewController: UIViewController {
         goActive.addObserver(
             self,
             selector: #selector(callAvtive),
-            name:NSNotification.Name.UIApplicationDidBecomeActive,
+        name:NSNotification.Name.UIApplicationDidBecomeActive,
             object: nil)
         //バックグラウンドになった瞬間に呼び出す
         let goBackGround = NotificationCenter.default
@@ -49,6 +49,13 @@ class ViewController: UIViewController {
             self,
             selector: #selector(saveDate),
             name:NSNotification.Name.UIApplicationDidEnterBackground,
+            object: nil)
+        //画面が横になった直後
+        let screen_move = NotificationCenter.default
+        screen_move.addObserver(
+            self,
+            selector: #selector(screenMove),
+            name:NSNotification.Name.UIApplicationDidChangeStatusBarFrame,
             object: nil)
     }
     override func didReceiveMemoryWarning() {
@@ -94,6 +101,7 @@ class ViewController: UIViewController {
         time_label.sizeToFit()
         time_label.textAlignment = .center
         time_label.layer.position = CGPoint(x: display_width/2,y: display_height/5)
+        time_label.font = UIFont.systemFont(ofSize: display_height/8)
         
         //日付を表示
         let date_formatter = DateFormatter()
@@ -103,6 +111,7 @@ class ViewController: UIViewController {
         date_label.sizeToFit()
         date_label.textAlignment = .center
         date_label.layer.position = CGPoint(x: display_width/2,y: time_label.layer.position.y+display_height/10)
+        date_label.font = UIFont.systemFont(ofSize: display_height/20)
     }
     
     /*
@@ -145,6 +154,7 @@ class ViewController: UIViewController {
             var w=0
             for i in events{
                 labelArray[w].text = i.title
+                labelArray[w].font = UIFont.systemFont(ofSize: display_height/20)
                 labelArray[w].sizeToFit()
                 labelArray[w].textAlignment = .center
                 labelArray[w].layer.position = CGPoint(x: display_width/2,y: display_height*CGFloat(5+w)/8)
@@ -166,6 +176,13 @@ class ViewController: UIViewController {
     {
         print("保存！")
         userDefaults.set(time_bool, forKey: "time_bool")
+    }
+    /*
+     画面が横になった時に表示される
+     */
+    @objc func screenMove() {
+        display_width = self.view.bounds.width
+        display_height = self.view.bounds.height
     }
     /*
      アプリ起動時に呼べれる関数
