@@ -35,7 +35,7 @@ class ViewController: UIViewController {
         labelArray[0] = event1
         labelArray[1] = event2
         labelArray[2] = event3
-        time_switch.layer.position = CGPoint(x: display_width/2,y: display_height/2)
+        time_switch.layer.position = CGPoint(x: display_width/10,y: display_height/10)
         //アプリがアクティブになった瞬間に呼び出す
         let goActive = NotificationCenter.default
         goActive.addObserver(
@@ -68,10 +68,8 @@ class ViewController: UIViewController {
      */
     @IBAction func `switch`(_ sender: Any) {
         if (sender as AnyObject).isOn {
-            print(time_bool)
             time_bool=true
         }else {
-            print(time_bool)
             time_bool=false
         }
     }
@@ -83,9 +81,9 @@ class ViewController: UIViewController {
         let time_formatter = DateFormatter()
         
         if(time_bool){
-            time_formatter.dateFormat = "HH:mm:ss"
+            time_formatter.dateFormat = "HH:mm"
         }else{
-            time_formatter.dateFormat = "HH時mm分ss秒"
+            time_formatter.dateFormat = "HH時mm分"
         }
         // 時間を表示
         var displayTime = time_formatter.string(from: Date())    // Date()だけで現在時刻を表す
@@ -100,8 +98,9 @@ class ViewController: UIViewController {
         time_label.text = displayTime
         time_label.sizeToFit()
         time_label.textAlignment = .center
-        time_label.layer.position = CGPoint(x: display_width/2,y: display_height/5)
-        time_label.font = UIFont.systemFont(ofSize: display_height/8)
+        time_label.layer.position = CGPoint(x: display_width/2,y: display_height/3)
+        time_label.adjustsFontSizeToFitWidth = true;
+        time_label.font = UIFont.systemFont(ofSize: display_height/3)
         
         //日付を表示
         let date_formatter = DateFormatter()
@@ -110,7 +109,7 @@ class ViewController: UIViewController {
         date_label.text = displayDate
         date_label.sizeToFit()
         date_label.textAlignment = .center
-        date_label.layer.position = CGPoint(x: display_width/2,y: time_label.layer.position.y+display_height/10)
+        date_label.layer.position = CGPoint(x: display_width/2,y: display_height/10)
         date_label.font = UIFont.systemFont(ofSize: display_height/20)
     }
     
