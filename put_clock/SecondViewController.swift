@@ -9,7 +9,7 @@
 import UIKit
 import EventKit
 
-class ViewController: UIViewController {
+class SecondViewController: UIViewController {
     @IBOutlet weak var time_label: UILabel!
     @IBOutlet weak var date_label: UILabel!
     @IBOutlet weak var event1: UILabel!
@@ -25,7 +25,7 @@ class ViewController: UIViewController {
     // NSUserDefaultsインスタンスの生成
     let userDefaults = UserDefaults.standard
     /*
-         一番最初に呼ばれる
+     一番最初に呼ばれる
      */
     override func viewDidLoad() {
         accessApplication()
@@ -41,7 +41,7 @@ class ViewController: UIViewController {
         goActive.addObserver(
             self,
             selector: #selector(callAvtive),
-        name:NSNotification.Name.UIApplicationDidBecomeActive,
+            name:NSNotification.Name.UIApplicationDidBecomeActive,
             object: nil)
         //バックグラウンドになった瞬間に呼び出す
         let goBackGround = NotificationCenter.default
@@ -64,7 +64,7 @@ class ViewController: UIViewController {
     }
     
     /*
-         スイッチの切り替え時
+     スイッチの切り替え時
      */
     @IBAction func `switch`(_ sender: Any) {
         if (sender as AnyObject).isOn {
@@ -74,9 +74,9 @@ class ViewController: UIViewController {
         }
     }
     
-        /*
-             時刻の表示
-         */
+    /*
+     時刻の表示
+     */
     @objc func displayClock() {
         let time_formatter = DateFormatter()
         
@@ -98,7 +98,7 @@ class ViewController: UIViewController {
         time_label.text = displayTime
         time_label.sizeToFit()
         time_label.textAlignment = .center
-        time_label.layer.position = CGPoint(x: display_width/2,y: display_height/3)
+        time_label.layer.position = CGPoint(x: display_width/3,y: display_height/3)
         time_label.adjustsFontSizeToFitWidth = true;
         time_label.font = UIFont.systemFont(ofSize: display_height/3)
         
@@ -114,7 +114,7 @@ class ViewController: UIViewController {
     }
     
     /*
-         アクセス権の表示
+     アクセス権の表示
      */
     func accessApplication()
     {
@@ -128,7 +128,7 @@ class ViewController: UIViewController {
         case .notDetermined:
             self.myEventStore.requestAccess(to: .event, completion: { (result:Bool, error:Error?) in
                 if result {
-//                    self.eventGet()
+                    //                    self.eventGet()
                 } else {
                     // 使用拒否
                 }
@@ -180,11 +180,9 @@ class ViewController: UIViewController {
      画面が横になった時に表示される
      */
     @objc func screenMove() {
-        print("まじか")
         display_width = self.view.bounds.width
         display_height = self.view.bounds.height
     }
-    
     /*
      アプリ起動時に呼べれる関数
      */
@@ -201,6 +199,5 @@ class ViewController: UIViewController {
         }, completion: nil)
         timer.fire()    // 無くても動くけどこれが無いと初回の実行がラグる
     }
-
+    
 }
-
