@@ -10,16 +10,16 @@ import UIKit
 import EventKit
 
 class SettingViewController: UIViewController {
-    
+    var ViewController: ViewController!
     /*
      一番最初に呼ばれる
      */
-    @IBAction func touchButton(_ sender: Any) {
-        
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
+    }
+    @IBAction func aaa(_ sender: Any) {
+        //self.ViewController.callAvtive()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -28,10 +28,10 @@ class ViewController: UIViewController {
          一番最初に呼ばれる
      */
     override func viewDidLoad() {
+        super.viewDidLoad()
         accessApplication()
         display_width = self.view.bounds.width
         display_height = self.view.bounds.height
-        super.viewDidLoad()
         labelArray[0] = event1
         labelArray[1] = event2
         labelArray[2] = event3
