@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GXK-AV-yIi">
     <device id="retina4_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,10 +9,35 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--First View Controller-->
+        <scene sceneID="I5d-7U-RaX">
+            <objects>
+                <viewController storyboardIdentifier="First" id="23k-Ef-OIg" customClass="FirstViewController" customModule="put_clock" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Qhz-Z3-3VP" customClass="First">
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kmb-Ps-Kfw">
+                                <rect key="frame" x="267" y="177" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="xPD-1y-Dz4"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="2xV-7U-z5v"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bCp-Li-QQF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-676" y="118"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="put_clock" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="View" id="BYZ-38-t0r" customClass="ViewController" customModule="put_clock" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -67,6 +92,13 @@
                                     <segue destination="MrG-Vs-CDz" kind="show" id="K0P-J9-8Ye"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Inz-9x-zVA">
+                                <rect key="frame" x="472" y="254" width="164" height="121"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="42"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -82,12 +114,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-98.50074962518741" y="117.59999999999999"/>
+            <point key="canvasLocation" x="92.203898050974516" y="117.59999999999999"/>
         </scene>
         <!--Setting View Controller-->
         <scene sceneID="HoK-7R-c1P">
             <objects>
-                <viewController id="MrG-Vs-CDz" customClass="SettingViewController" customModule="put_clock" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Setting" id="MrG-Vs-CDz" customClass="SettingViewController" customModule="put_clock" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ylz-4u-axH">
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -98,7 +130,7 @@
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="aaa:" destination="MrG-Vs-CDz" eventType="touchDown" id="2eI-Vn-vgP"/>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="0sR-0O-iXB"/>
+                                    <segue destination="23k-Ef-OIg" kind="show" id="JzE-1T-VTr"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gMQ-jM-0m4">
@@ -106,8 +138,8 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
-                                    <action selector="touchButton:" destination="MrG-Vs-CDz" eventType="touchDown" id="CA9-47-OYu"/>
-                                    <segue destination="cxJ-qE-99H" kind="show" id="LFV-Nz-PYk"/>
+                                    <action selector="second:" destination="MrG-Vs-CDz" eventType="touchDown" id="A6q-gl-4ft"/>
+                                    <segue destination="23k-Ef-OIg" kind="show" id="4KU-YY-2QF"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -117,12 +149,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="olE-xx-3Eq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="663" y="118"/>
+            <point key="canvasLocation" x="853.22338830584715" y="117.59999999999999"/>
         </scene>
         <!--Second View Controller-->
         <scene sceneID="JRb-aa-TZD">
             <objects>
-                <viewController id="cxJ-qE-99H" customClass="SecondViewController" customModule="put_clock" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Second" id="cxJ-qE-99H" customClass="SecondViewController" customModule="put_clock" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fgf-dY-MJS">
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -177,6 +209,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mzJ-s5-msJ">
+                                <rect key="frame" x="363" y="72" width="176" height="98"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="3Tp-1n-zxh"/>
@@ -192,10 +231,29 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8De-Br-MHb" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-99" y="978"/>
+            <point key="canvasLocation" x="-99.400299850074973" y="976.79999999999995"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Ja3-TU-9kC">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GXK-AV-yIi" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="KNe-dl-xzG">
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="32"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="23k-Ef-OIg" kind="relationship" relationship="rootViewController" id="cWY-Dz-v6U"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Iqr-QC-n4Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1373" y="118"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="G9K-4b-dHI"/>
+        <segue reference="JzE-1T-VTr"/>
     </inferredMetricsTieBreakers>
 </document>
