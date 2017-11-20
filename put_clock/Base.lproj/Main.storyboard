@@ -125,18 +125,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xqY-vS-b0u">
-                                <rect key="frame" x="116" y="102" width="46" height="30"/>
+                                <rect key="frame" x="116" y="102" width="122" height="77"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="1へ移動"/>
                                 <connections>
                                     <action selector="aaa:" destination="MrG-Vs-CDz" eventType="touchDown" id="2eI-Vn-vgP"/>
                                     <segue destination="23k-Ef-OIg" kind="show" id="JzE-1T-VTr"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gMQ-jM-0m4">
-                                <rect key="frame" x="116" y="299" width="46" height="30"/>
+                                <rect key="frame" x="154" y="278" width="77" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="２へ移動"/>
                                 <connections>
                                     <action selector="second:" destination="MrG-Vs-CDz" eventType="touchDown" id="A6q-gl-4ft"/>
                                     <segue destination="23k-Ef-OIg" kind="show" id="4KU-YY-2QF"/>
@@ -253,7 +253,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="G9K-4b-dHI"/>
+        <segue reference="K0P-J9-8Ye"/>
         <segue reference="JzE-1T-VTr"/>
     </inferredMetricsTieBreakers>
 </document>
