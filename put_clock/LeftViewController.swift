@@ -10,32 +10,33 @@ import UIKit
 import EventKit
 
 
-class ViewController: UIViewController {
+class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
     @IBOutlet weak var time_label: UILabel!
     @IBOutlet weak var date_label: UILabel!
     
+    @IBOutlet weak var table: UITableView!
+    
     var labelArray = [UILabel(), UILabel(), UILabel()]
     var time_bool:Bool = true
-    var display_width:CGFloat = 0.0
-    var display_height:CGFloat = 0.0
     private let myEventStore:EKEventStore = EKEventStore()
     // NSUserDefaultsインスタンスの生成
     let userDefaults = UserDefaults.standard
     /*
-         一番最初に呼ばれる
+     一番最初に呼ばれる
      */
     override func viewDidLoad() {
         super.viewDidLoad()
         accessApplication()
-        display_width = self.view.bounds.width
-        display_height = self.view.bounds.height
+//        labelArray[0] = event1
+//        labelArray[1] = event2
+//        labelArray[2] = event3
         //アプリがアクティブになった瞬間に呼び出す
         let goActive = NotificationCenter.default
         goActive.addObserver(
             self,
             selector: #selector(callAvtive),
-        name:NSNotification.Name.UIApplicationDidBecomeActive,
+            name:NSNotification.Name.UIApplicationDidBecomeActive,
             object: nil)
         //バックグラウンドになった瞬間に呼び出す
         let goBackGround = NotificationCenter.default
@@ -58,7 +59,7 @@ class ViewController: UIViewController {
     }
     
     /*
-         スイッチの切り替え時
+     スイッチの切り替え時
      */
 //    @IBAction func `switch`(_ sender: Any) {
 //        if (sender as AnyObject).isOn {
@@ -68,9 +69,9 @@ class ViewController: UIViewController {
 //        }
 //    }
     
-        /*
-             時刻の表示
-         */
+    /*
+     時刻の表示
+     */
     @objc func displayClock() {
         let time_formatter = DateFormatter()
         
@@ -99,7 +100,7 @@ class ViewController: UIViewController {
     }
     
     /*
-         アクセス権の表示
+     アクセス権の表示
      */
     func accessApplication()
     {
@@ -113,7 +114,7 @@ class ViewController: UIViewController {
         case .notDetermined:
             self.myEventStore.requestAccess(to: .event, completion: { (result:Bool, error:Error?) in
                 if result {
-//                    self.eventGet()
+                    //                    self.eventGet()
                 } else {
                     // 使用拒否
                 }
@@ -137,6 +138,9 @@ class ViewController: UIViewController {
         if !events.isEmpty {
             var w=0
             for i in events{
+                //                print(i.startDate)
+                //                print(i.endDate)
+                w+=1
             }
         }else{
             print("何もない")
@@ -156,8 +160,6 @@ class ViewController: UIViewController {
      */
     @objc func screenMove() {
         print("まじか")
-        display_width = self.view.bounds.width
-        display_height = self.view.bounds.height
     }
     
     /*
@@ -165,6 +167,8 @@ class ViewController: UIViewController {
      */
     @objc func callAvtive() {
         eventGet()
+//        time_switch.setOn(userDefaults.bool(forKey: "time_bool"),animated: false)
+//        time_bool = time_switch.isOn
         // 1秒ごとに「displayClock」を実行する
         let timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(displayClock), userInfo: nil, repeats: true)
         time_label.alpha=1
@@ -174,6 +178,28 @@ class ViewController: UIViewController {
         }, completion: nil)
         timer.fire()    // 無くても動くけどこれが無いと初回の実行がラグる
     }
-
+    func tableView(_ table: UITableView,
+                   numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func tableView(_ table: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        // tableCell の ID で UITableViewCell のインスタンスを生成
+        let cell = table.dequeueReusableCell(withIdentifier: "eventCell",
+            for: indexPath)
+        
+        //仮テキスト
+        cell.textLabel?.text = "情報工学実験4"
+        cell.detailTextLabel?.text = "14:40 - 17:50"
+        
+        let testDraw = draw(frame: CGRect(x: 0, y: 0,width: 1000, height: 1000))
+        cell.addSubview(testDraw)
+        testDraw.isOpaque = false
+        
+        return cell
+    }
 }
+
 
