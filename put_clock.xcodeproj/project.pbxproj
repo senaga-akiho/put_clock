@@ -17,6 +17,9 @@
 		96A22DA01FB445B50001792D /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A22D9F1FB445B50001792D /* FirstViewController.swift */; };
 		96FDA7C01FAC43F800A92743 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FDA7BF1FAC43F800A92743 /* SecondViewController.swift */; };
 		96FDA7C21FAC5F3B00A92743 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FDA7C11FAC5F3B00A92743 /* SettingViewController.swift */; };
+		E784EF621FCB7B3E00759F93 /* ThemeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E784EF611FCB7B3E00759F93 /* ThemeTableViewCell.swift */; };
+		E7ED3E7B1FCB73F20091C55F /* theme1.png in Resources */ = {isa = PBXBuildFile; fileRef = E7ED3E791FCB73F10091C55F /* theme1.png */; };
+		E7ED3E7C1FCB73F20091C55F /* theme2.png in Resources */ = {isa = PBXBuildFile; fileRef = E7ED3E7A1FCB73F10091C55F /* theme2.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +56,9 @@
 		96A22D9F1FB445B50001792D /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		96FDA7BF1FAC43F800A92743 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		96FDA7C11FAC5F3B00A92743 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		E784EF611FCB7B3E00759F93 /* ThemeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeTableViewCell.swift; sourceTree = "<group>"; };
+		E7ED3E791FCB73F10091C55F /* theme1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = theme1.png; path = ../../../theme1.png; sourceTree = "<group>"; };
+		E7ED3E7A1FCB73F10091C55F /* theme2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = theme2.png; path = ../../../theme2.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +113,10 @@
 				968920141F9F405800484F22 /* ViewController.swift */,
 				96FDA7BF1FAC43F800A92743 /* SecondViewController.swift */,
 				96FDA7C11FAC5F3B00A92743 /* SettingViewController.swift */,
+				E784EF611FCB7B3E00759F93 /* ThemeTableViewCell.swift */,
 				968920161F9F405800484F22 /* Main.storyboard */,
+				E7ED3E791FCB73F10091C55F /* theme1.png */,
+				E7ED3E7A1FCB73F10091C55F /* theme2.png */,
 				968920191F9F405800484F22 /* Assets.xcassets */,
 				9689201B1F9F405800484F22 /* LaunchScreen.storyboard */,
 				9689201E1F9F405800484F22 /* Info.plist */,
@@ -241,7 +250,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7ED3E7C1FCB73F20091C55F /* theme2.png in Resources */,
 				9689201D1F9F405800484F22 /* LaunchScreen.storyboard in Resources */,
+				E7ED3E7B1FCB73F20091C55F /* theme1.png in Resources */,
 				9689201A1F9F405800484F22 /* Assets.xcassets in Resources */,
 				968920181F9F405800484F22 /* Main.storyboard in Resources */,
 			);
@@ -271,6 +282,7 @@
 				96A22DA01FB445B50001792D /* FirstViewController.swift in Sources */,
 				96FDA7C01FAC43F800A92743 /* SecondViewController.swift in Sources */,
 				96FDA7C21FAC5F3B00A92743 /* SettingViewController.swift in Sources */,
+				E784EF621FCB7B3E00759F93 /* ThemeTableViewCell.swift in Sources */,
 				968920151F9F405800484F22 /* ViewController.swift in Sources */,
 				968920131F9F405800484F22 /* AppDelegate.swift in Sources */,
 			);
