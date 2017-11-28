@@ -106,14 +106,6 @@
                                 <color key="textColor" red="0.22283703090000001" green="0.24260264640000001" blue="0.27586704490000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I7t-p5-FHC">
-                                <rect key="frame" x="10" y="11" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <segue destination="2M8-Y4-Yit" kind="show" id="VIB-6m-W9U"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.93323183060000003" green="0.93339174989999996" blue="0.93322181699999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
@@ -144,7 +136,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dRc-Pf-f7J" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="RUh-Rc-CO4"/>
+                <tapGestureRecognizer id="RUh-Rc-CO4">
+                    <connections>
+                        <segue destination="2M8-Y4-Yit" kind="show" id="a80-0v-xtg"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="510" y="-1188"/>
         </scene>
@@ -277,16 +273,9 @@
                                 <color key="textColor" red="3.1578285420000001e-05" green="0.67914682630000001" blue="0.71021193270000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U1z-Te-cYm">
-                                <rect key="frame" x="30" y="46" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <segue destination="2M8-Y4-Yit" kind="show" id="AEM-Ql-H0D"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.93323183060000003" green="0.93339174989999996" blue="0.93322181699999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="IkB-Xj-85G" firstAttribute="centerX" secondItem="fyJ-NY-yJ9" secondAttribute="centerX" id="3QS-2T-njl"/>
                             <constraint firstItem="3LN-ad-dwW" firstAttribute="centerY" secondItem="fyJ-NY-yJ9" secondAttribute="centerY" id="904-2J-zkJ"/>
@@ -305,6 +294,9 @@
                             <constraint firstItem="3LN-ad-dwW" firstAttribute="height" secondItem="MGW-SX-DYi" secondAttribute="height" multiplier="3:1" id="rro-3Z-TEh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zmi-kH-Ul9"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="o06-CX-dhq" appends="YES" id="EQL-Ee-75b"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="date_label" destination="IkB-Xj-85G" id="mgT-TQ-xW5"/>
@@ -312,11 +304,16 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m2S-5j-EsC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="o06-CX-dhq">
+                    <connections>
+                        <segue destination="2M8-Y4-Yit" kind="show" id="nUc-en-NlL"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="510" y="-108"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="AEM-Ql-H0D"/>
+        <segue reference="nUc-en-NlL"/>
     </inferredMetricsTieBreakers>
 </document>
