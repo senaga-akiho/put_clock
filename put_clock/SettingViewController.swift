@@ -10,12 +10,20 @@ import UIKit
 import EventKit
 
 class SettingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    var setting:[Bool] = [true,true,true,true]
+
     /*
      一番最初に呼ばれる
      */
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        let goActive = NotificationCenter.default
+//        goActive.addObserver(
+//            self,
+//            selector: #selector(SetDate),
+//            name:NSNotification.Name.UIApplicationDidBecomeActive,
+//            object: nil)
     }
     //FirstViewへ移動して，１（View）に移動
     @IBAction func aaa(_ sender: Any) {
@@ -88,10 +96,13 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
             return themecell
         }
         else{
-            advancedsettingcell = SettingTableView.dequeueReusableCell(withIdentifier: "AdvancedSettingCell", for: indexPath)
+            advancedsettingcell = SettingTableView.dequeueReusableCell(withIdentifier: "AdvancedSettingCell", for: indexPath) as! SwitchTableViewCell
             advancedsettingcell.textLabel?.text = contents[indexPath.section][indexPath.row]
             return advancedsettingcell
         }
+    }
+    func SetDate(){
+        
     }
     
 }

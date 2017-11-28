@@ -194,19 +194,25 @@
                                             <outlet property="ThemeImageView" destination="ggz-rV-9cz" id="QWi-0h-uQj"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AdvancedSettingCell" id="TN0-1L-0rH">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AdvancedSettingCell" id="TN0-1L-0rH" customClass="SwitchTableViewCell" customModule="put_clock" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="128" width="667" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TN0-1L-0rH" id="Eot-Ic-DHt">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="center" restorationIdentifier="switch" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TN0-1L-0rH" id="Eot-Ic-DHt">
                                             <rect key="frame" x="0.0" y="0.0" width="667" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z17-tH-gjj">
                                                     <rect key="frame" x="605" y="6" width="49" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="value_change:" destination="TN0-1L-0rH" eventType="valueChanged" id="0sf-Pi-QpA"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="swtich" destination="z17-tH-gjj" id="6e6-e9-aW0"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		965C36341FCCF27700926119 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965C36331FCCF27700926119 /* SwitchTableViewCell.swift */; };
 		968920131F9F405800484F22 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968920121F9F405800484F22 /* AppDelegate.swift */; };
 		968920151F9F405800484F22 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968920141F9F405800484F22 /* ViewController.swift */; };
 		968920181F9F405800484F22 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 968920161F9F405800484F22 /* Main.storyboard */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		965C36331FCCF27700926119 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
 		9689200F1F9F405800484F22 /* put_clock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = put_clock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		968920121F9F405800484F22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		968920141F9F405800484F22 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				96A54D241FCC1A2B001EA499 /* theme1.png */,
 				96A54D1A1FCC0F6C001EA499 /* draw.swift */,
 				96A54D1E1FCC17C3001EA499 /* ThemeTableViewCell.swift */,
+				965C36331FCCF27700926119 /* SwitchTableViewCell.swift */,
 			);
 			path = put_clock;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				96A22DA01FB445B50001792D /* FirstViewController.swift in Sources */,
+				965C36341FCCF27700926119 /* SwitchTableViewCell.swift in Sources */,
 				96A54D1F1FCC17C3001EA499 /* ThemeTableViewCell.swift in Sources */,
 				96FDA7C21FAC5F3B00A92743 /* SettingViewController.swift in Sources */,
 				96A54D191FCC0B4B001EA499 /* LeftViewController.swift in Sources */,

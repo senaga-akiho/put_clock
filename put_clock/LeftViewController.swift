@@ -76,9 +76,9 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         let time_formatter = DateFormatter()
         
         if(time_bool){
-            time_formatter.dateFormat = "HH:mm"
+            time_formatter.dateFormat = "HH mm"
         }else{
-            time_formatter.dateFormat = "HH時mm分"
+            time_formatter.dateFormat = "HH mm"
         }
         // 時間を表示
         var displayTime = time_formatter.string(from: Date())    // Date()だけで現在時刻を表す
@@ -171,11 +171,6 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
 //        time_bool = time_switch.isOn
         // 1秒ごとに「displayClock」を実行する
         let timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(displayClock), userInfo: nil, repeats: true)
-        time_label.alpha=1
-        UIView.animate(withDuration: 1.0, delay: 0.0,
-                       options: UIViewAnimationOptions.repeat, animations: { () -> Void in
-                        self.time_label.alpha = 0.0
-        }, completion: nil)
         timer.fire()    // 無くても動くけどこれが無いと初回の実行がラグる
     }
     func tableView(_ table: UITableView,
