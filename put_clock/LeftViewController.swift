@@ -195,6 +195,10 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         
         return cell
     }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
 }
 
 

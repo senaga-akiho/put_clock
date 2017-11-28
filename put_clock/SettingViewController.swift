@@ -105,4 +105,8 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
         
     }
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
 }

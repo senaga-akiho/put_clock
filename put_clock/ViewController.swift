@@ -170,6 +170,10 @@ class ViewController: UIViewController {
         
         timer.fire()    // 無くても動くけどこれが無いと初回の実行がラグる
     }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
 
 }
 
