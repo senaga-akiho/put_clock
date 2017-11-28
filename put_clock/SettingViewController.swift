@@ -88,7 +88,7 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let themecell: ThemeTableViewCell
-        let advancedsettingcell: UITableViewCell
+        let advancedsettingcell: SwitchTableViewCell
         
         if(indexPath.section == 0){
             themecell = SettingTableView.dequeueReusableCell(withIdentifier: "ThemeCell", for: indexPath) as! ThemeTableViewCell
@@ -102,7 +102,7 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     func SetDate(){
-        
+        print("aaa")
     }
     
     override var prefersStatusBarHidden: Bool {

@@ -75,7 +75,7 @@ class ViewController: UIViewController {
         let time_formatter = DateFormatter()
         
         if(time_bool){
-            time_formatter.dateFormat = "HH:mm"
+            time_formatter.dateFormat = "HH:mm:ss"
         }else{
             time_formatter.dateFormat = "HH時mm分"
         }
@@ -93,7 +93,7 @@ class ViewController: UIViewController {
         
         //日付を表示
         let date_formatter = DateFormatter()
-        date_formatter.dateFormat = "yyyy/MM/dd"
+        date_formatter.dateFormat = "yyyy/MM/dd EEE"
         let displayDate = date_formatter.string(from: Date())
         date_label.text = displayDate
     }

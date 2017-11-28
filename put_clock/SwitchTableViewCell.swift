@@ -22,7 +22,6 @@ class SwitchTableViewCell: UITableViewCell {
     }
     @IBAction func value_change(_ sender: Any) {
         let hoge = self.superview as!UITableView
-        let hogehoge = self.superview as!UITableView
         // touchIndexは選択したセルが何番目かを記録しておくプロパティ
         let touchIndex = hoge.indexPath(for: self)
         print(touchIndex?.row as!Int)
