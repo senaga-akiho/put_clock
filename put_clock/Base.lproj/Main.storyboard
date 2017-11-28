@@ -18,11 +18,36 @@
         <scene sceneID="I5d-7U-RaX">
             <objects>
                 <viewController storyboardIdentifier="First" id="23k-Ef-OIg" customClass="FirstViewController" customModule="put_clock" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Qhz-Z3-3VP" customClass="First">
+                    <view key="view" contentMode="scaleToFill" id="BJT-3S-gue">
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="xPD-1y-Dz4"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="theme1.png" translatesAutoresizingMaskIntoConstraints="NO" id="VyA-nG-45e">
+                                <rect key="frame" x="268.5" y="57.5" width="130" height="130"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="130" id="4QV-hf-09p"/>
+                                    <constraint firstAttribute="width" constant="130" id="Poi-DG-PWv"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Smart Clock" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YPZ-T0-ORj">
+                                <rect key="frame" x="212.5" y="194.5" width="242" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="DpJ-dy-evS"/>
+                                    <constraint firstAttribute="width" constant="242" id="Tez-ne-rMZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="50"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93323183060000003" green="0.93339174989999996" blue="0.93322181699999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="YPZ-T0-ORj" firstAttribute="centerX" secondItem="VyA-nG-45e" secondAttribute="centerX" id="BCV-E3-QCY"/>
+                            <constraint firstItem="VyA-nG-45e" firstAttribute="centerX" secondItem="BJT-3S-gue" secondAttribute="centerX" id="GXW-AH-zE6"/>
+                            <constraint firstAttribute="centerY" secondItem="VyA-nG-45e" secondAttribute="bottom" id="H3l-vW-yhp"/>
+                            <constraint firstItem="YPZ-T0-ORj" firstAttribute="top" secondItem="VyA-nG-45e" secondAttribute="bottom" constant="7" id="cZc-ze-GbO"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Q4Y-VW-CgU"/>
                     </view>
                     <navigationItem key="navigationItem" id="2xV-7U-z5v"/>
                 </viewController>
@@ -329,6 +354,9 @@
             <point key="canvasLocation" x="510" y="-108"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="theme1.png" width="1600" height="768"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="a80-0v-xtg"/>
     </inferredMetricsTieBreakers>
