@@ -16,10 +16,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var date_label: UILabel!
     
     var labelArray = [UILabel(), UILabel(), UILabel()]
-    var time_bool:Bool = true
     var display_width:CGFloat = 0.0
     var display_height:CGFloat = 0.0
     private let myEventStore:EKEventStore = EKEventStore()
+    var setting:[Bool] = [true,true,true,true]
     // NSUserDefaultsインスタンスの生成
     let userDefaults = UserDefaults.standard
     /*
@@ -73,11 +73,36 @@ class ViewController: UIViewController {
          */
     @objc func displayClock() {
         let time_formatter = DateFormatter()
-        
-        if(time_bool){
+        //日付を表示
+        let date_formatter = DateFormatter()
+        if(setting[0] && setting[1] && setting[2] && setting[3]){
+            time_formatter.dateFormat = "HH時mm分ss秒"
+            date_formatter.locale = NSLocale(localeIdentifier: "ja_JP") as Locale! as Locale!
+            date_formatter.dateFormat = "yyyy年MM月dd日 E曜日"
+        }else if(setting[0]==false && setting[1] && setting[2]){
             time_formatter.dateFormat = "HH:mm:ss"
-        }else{
+            date_formatter.dateFormat = "yyyy/MM/dd EEE"
+        }else if(setting[0] && setting[1]==false && setting[2]){
+            time_formatter.dateFormat = "HH時mm分ss秒"
+            date_formatter.locale = NSLocale(localeIdentifier: "ja_JP") as Locale! as Locale!
+            date_formatter.dateFormat = "yyyy年MM月dd日 E曜日"
+        }else if(setting[0] && setting[1] && setting[2]==false){
             time_formatter.dateFormat = "HH時mm分"
+            date_formatter.locale = NSLocale(localeIdentifier: "ja_JP") as Locale! as Locale!
+            date_formatter.dateFormat = "yyyy年MM月dd日 E曜日"
+        }else if(setting[0]==false && setting[1]==false && setting[2]){
+            time_formatter.dateFormat = "HH:mm:ss"
+            date_formatter.dateFormat = "yyyy/MM/dd EEE"
+        }else if(setting[0]==false && setting[1] && setting[2]==false){
+            time_formatter.dateFormat = "HH:mm"
+            date_formatter.dateFormat = "yyyy/MM/dd EEE"
+        }else if(setting[0] && setting[1]==false && setting[2]==false){
+            time_formatter.dateFormat = "HH時mm分"
+            date_formatter.locale = NSLocale(localeIdentifier: "ja_JP") as Locale! as Locale!
+            date_formatter.dateFormat = "yyyy年MM月dd日 E曜日"
+        }else if(setting[0]==false && setting[1]==false && setting[2]==false){
+            time_formatter.dateFormat = "HH:mm"
+            date_formatter.dateFormat = "yyyy/MM/dd EEE"
         }
         // 時間を表示
         var displayTime = time_formatter.string(from: Date())    // Date()だけで現在時刻を表す
@@ -91,9 +116,6 @@ class ViewController: UIViewController {
         // ラベルに表示
         time_label.text = displayTime
         
-        //日付を表示
-        let date_formatter = DateFormatter()
-        date_formatter.dateFormat = "yyyy/MM/dd EEE"
         let displayDate = date_formatter.string(from: Date())
         date_label.text = displayDate
     }
@@ -149,7 +171,6 @@ class ViewController: UIViewController {
     @objc func saveDate()
     {
         print("保存！")
-        userDefaults.set(time_bool, forKey: "time_bool")
     }
     /*
      画面が横になった時に表示される
@@ -169,6 +190,14 @@ class ViewController: UIViewController {
         let timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(displayClock), userInfo: nil, repeats: true)
         
         timer.fire()    // 無くても動くけどこれが無いと初回の実行がラグる
+    }
+    /*
+     画面遷移後に呼ばれる
+     */
+    @objc func SaveSetting(change_setting:[Bool]) {
+        for i in 0..<change_setting.count {
+            self.setting[i] = change_setting[i]
+        }
     }
     
     override var prefersStatusBarHidden: Bool {

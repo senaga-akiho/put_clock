@@ -11,19 +11,15 @@ import EventKit
 
 class SettingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var setting:[Bool] = [true,true,true,true]
-
+    var set_num:[String] = ["one","two","three","fore"]
+    // NSUserDefaultsインスタンスの生成
+    let userDefaults = UserDefaults.standard
+    
     /*
      一番最初に呼ばれる
      */
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        let goActive = NotificationCenter.default
-//        goActive.addObserver(
-//            self,
-//            selector: #selector(SetDate),
-//            name:NSNotification.Name.UIApplicationDidBecomeActive,
-//            object: nil)
     }
     //FirstViewへ移動して，１（View）に移動
     @IBAction func aaa(_ sender: Any) {
@@ -31,6 +27,7 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
         let targetViewController = storyboard!.instantiateViewController(withIdentifier: "Left") as! LeftViewController
         targetViewController.modalTransitionStyle = UIModalTransitionStyle.flipHorizontal
         self.present( targetViewController, animated: true, completion: {
+            targetViewController.SaveSetting(change_setting: self.setting)
             targetViewController.callAvtive()
         })
     }
@@ -39,6 +36,7 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
         let targetViewController = storyboard!.instantiateViewController(withIdentifier: "View") as! ViewController
         targetViewController.modalTransitionStyle = UIModalTransitionStyle.flipHorizontal
         self.present( targetViewController, animated: true, completion: {
+            targetViewController.SaveSetting(change_setting: self.setting)
             targetViewController.callAvtive()
         })
     }
@@ -82,10 +80,6 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
         return
     }
     
-    //func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    //return 70
-    //}
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let themecell: ThemeTableViewCell
         let advancedsettingcell: SwitchTableViewCell
@@ -96,17 +90,38 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
             return themecell
         }
         else{
+            if ((userDefaults.object(forKey: set_num[indexPath.row])) == nil) {
+                userDefaults.set(setting[indexPath.row],forKey:set_num[indexPath.row])
+            }
+            print(userDefaults.bool(forKey: set_num[indexPath.row]))
+            setting[indexPath.row] = userDefaults.bool(forKey: set_num[indexPath.row])
             advancedsettingcell = SettingTableView.dequeueReusableCell(withIdentifier: "AdvancedSettingCell", for: indexPath) as! SwitchTableViewCell
             advancedsettingcell.textLabel?.text = contents[indexPath.section][indexPath.row]
+            advancedsettingcell.swtich.addTarget(self, action: #selector(checkButtonTapped), for: UIControlEvents.valueChanged)
+            advancedsettingcell.swtich.setOn(setting[indexPath.row], animated: false)
+//            }
             return advancedsettingcell
         }
-    }
-    func SetDate(){
-        print("aaa")
     }
     
     override var prefersStatusBarHidden: Bool {
         return true
+    }
+    /*
+     accessoryButtonTappedForRowWithIndexPathへパスを出す。
+     これでOK.
+     */
+    @objc func checkButtonTapped(sender: UISwitch, event: UIEvent) {
+        let hoge = sender.superview?.superview as! SwitchTableViewCell
+        let touchIndex = SettingTableView.indexPath(for: hoge)
+        print(touchIndex?.row as!Int)
+        let number = touchIndex?.row as!Int
+        if(setting[number] == true){
+            setting[number] = false
+        }else{
+            setting[number] = true
+        }
+        userDefaults.set(setting[number], forKey: set_num[number])
     }
     
 }

@@ -20,6 +20,7 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     var labelArray = [UILabel(), UILabel(), UILabel()]
     var time_bool:Bool = true
+    var setting:[Bool] = [true,true,true,true]
     private let myEventStore:EKEventStore = EKEventStore()
     // NSUserDefaultsインスタンスの生成
     let userDefaults = UserDefaults.standard
@@ -191,6 +192,14 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                         print("何もない")
                     }
         return w
+    }
+    /*
+     画面遷移後に呼ばれる
+     */
+    @objc func SaveSetting(change_setting:[Bool]) {
+        for i in 0..<change_setting.count {
+            self.setting[i] = change_setting[i]
+        }
     }
     
     func tableView(_ table: UITableView,
