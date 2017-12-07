@@ -20,6 +20,7 @@ class ViewController: UIViewController {
     var display_height:CGFloat = 0.0
     private let myEventStore:EKEventStore = EKEventStore()
     var setting:[Bool] = [true,true,true,true]
+    var set_num:[String] = ["one","two","three","fore"]
     // NSUserDefaultsインスタンスの生成
     let userDefaults = UserDefaults.standard
     /*
@@ -185,6 +186,7 @@ class ViewController: UIViewController {
      アプリ起動時に呼べれる関数
      */
     @objc func callAvtive() {
+        GetSetting()
         eventGet()
         // 1秒ごとに「displayClock」を実行する
         let timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(displayClock), userInfo: nil, repeats: true)
@@ -197,6 +199,19 @@ class ViewController: UIViewController {
     @objc func SaveSetting(change_setting:[Bool]) {
         for i in 0..<change_setting.count {
             self.setting[i] = change_setting[i]
+            userDefaults.set(setting[i], forKey: set_num[i])
+        }
+    }
+    /*
+     画面遷移後に呼ばれる
+     */
+    @objc func GetSetting() {
+        for i in 0..<setting.count {
+            if ((userDefaults.object(forKey: set_num[i])) == nil) {
+                userDefaults.set(setting[i],forKey:set_num[i])
+                print("asga")
+            }
+            setting[i] = userDefaults.bool(forKey: set_num[i])
         }
     }
     

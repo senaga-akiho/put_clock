@@ -93,7 +93,6 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
             if ((userDefaults.object(forKey: set_num[indexPath.row])) == nil) {
                 userDefaults.set(setting[indexPath.row],forKey:set_num[indexPath.row])
             }
-            print(userDefaults.bool(forKey: set_num[indexPath.row]))
             setting[indexPath.row] = userDefaults.bool(forKey: set_num[indexPath.row])
             advancedsettingcell = SettingTableView.dequeueReusableCell(withIdentifier: "AdvancedSettingCell", for: indexPath) as! SwitchTableViewCell
             advancedsettingcell.textLabel?.text = contents[indexPath.section][indexPath.row]

@@ -77,7 +77,7 @@ class FirstViewController: UIViewController {
      アプリ起動時に呼べれる関数
      */
     @objc func callAvtive() {
-        let targetViewController = storyboard!.instantiateViewController(withIdentifier: "Left") as! LeftViewController
+        let targetViewController = storyboard!.instantiateViewController(withIdentifier: "View") as! ViewController
         targetViewController.modalTransitionStyle = UIModalTransitionStyle.flipHorizontal
         self.present( targetViewController, animated: true, completion: {
             // 画面遷移後に`firstVCMethod`がログに出力されます
