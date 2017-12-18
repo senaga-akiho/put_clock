@@ -11,13 +11,12 @@ import EventKit
 
 class SettingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var setting:[Bool] = [true,true,true,true]
-
+    var selectedtheme = 0;
     /*
      一番最初に呼ばれる
      */
     override func viewDidLoad() {
         super.viewDidLoad()
-        
 //        let goActive = NotificationCenter.default
 //        goActive.addObserver(
 //            self,
@@ -25,6 +24,23 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
 //            name:NSNotification.Name.UIApplicationDidBecomeActive,
 //            object: nil)
     }
+    @IBAction func ApplyButton(_ sender: Any) {
+        if (selectedtheme == 0){
+            let targetViewController = storyboard!.instantiateViewController(withIdentifier: "Left") as! LeftViewController
+            targetViewController.modalTransitionStyle = UIModalTransitionStyle.flipHorizontal
+            self.present( targetViewController, animated: true, completion: {
+                targetViewController.callAvtive()
+            })
+        }
+        else if(selectedtheme == 1){
+            let targetViewController = storyboard!.instantiateViewController(withIdentifier: "View") as! ViewController
+            targetViewController.modalTransitionStyle = UIModalTransitionStyle.flipHorizontal
+            self.present( targetViewController, animated: true, completion: {
+                targetViewController.callAvtive()
+            })
+        }
+    }
+    /*
     //FirstViewへ移動して，１（View）に移動
     @IBAction func aaa(_ sender: Any) {
         //self.ViewController.callAvtive()
@@ -42,14 +58,13 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
             targetViewController.callAvtive()
         })
     }
+ */
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     //こっからTableViewのやつ↓
-
-    
     @IBOutlet weak var SettingTableView: UITableView!
     let contents = [["テーマ1", "テーマ2"], ["日本語表示", "24時間表示", "秒単位表示", "カレンダーイベント表示"]]
     let images = ["theme1.png", "theme2.png"]
@@ -70,21 +85,31 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(section == 0){
-            return contents[0].count
+            return 2
         }
         else if(section == 1){
-            return contents[1].count
+            return 4
         }
         return 0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if(indexPath.section == 0){
+            selectedtheme = indexPath.row
+            print(selectedtheme)
+            self.SettingTableView.reloadSections([indexPath.section], with: UITableViewRowAnimation.fade)
+        }
         return
     }
     
-    //func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    //return 70
-    //}
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if(indexPath.section == 0){
+            return 100
+        }
+        else {
+            return 50
+        }
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let themecell: ThemeTableViewCell
@@ -93,11 +118,20 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
         if(indexPath.section == 0){
             themecell = SettingTableView.dequeueReusableCell(withIdentifier: "ThemeCell", for: indexPath) as! ThemeTableViewCell
             themecell.ThemeImageView.image = UIImage(named: images[indexPath.row])
+            if (indexPath.row == selectedtheme){
+                themecell.CheckLabel.text = "✔️"
+            }
+            else {
+                themecell.CheckLabel.text = ""
+            }
+            themecell.ThemeLabel.text = contents[indexPath.section][indexPath.row]
             return themecell
         }
         else{
             advancedsettingcell = SettingTableView.dequeueReusableCell(withIdentifier: "AdvancedSettingCell", for: indexPath) as! SwitchTableViewCell
             advancedsettingcell.textLabel?.text = contents[indexPath.section][indexPath.row]
+            advancedsettingcell.textLabel?.backgroundColor = .clear
+            
             return advancedsettingcell
         }
     }

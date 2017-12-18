@@ -11,6 +11,9 @@ import UIKit
 class ThemeTableViewCell: UITableViewCell {
 
     @IBOutlet weak var ThemeImageView: UIImageView!
+    @IBOutlet weak var CheckLabel: UILabel!
+    @IBOutlet weak var ThemeLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

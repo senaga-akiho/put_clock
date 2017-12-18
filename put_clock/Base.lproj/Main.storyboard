@@ -181,16 +181,6 @@
                                     <action selector="aaa:" destination="2M8-Y4-Yit" eventType="touchDown" id="mDZ-Bs-4v3"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="48r-en-5qD">
-                                <rect key="frame" x="590" y="0.0" width="77" height="45"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="77" id="mW9-lw-ybL"/>
-                                </constraints>
-                                <state key="normal" title="２へ移動"/>
-                                <connections>
-                                    <action selector="second:" destination="2M8-Y4-Yit" eventType="touchDown" id="zoy-Dc-t2Q"/>
-                                </connections>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1Yo-Km-nBf">
                                 <rect key="frame" x="0.0" y="84" width="667" height="291"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -206,10 +196,26 @@
                                                     <rect key="frame" x="15" y="11" width="119" height="78"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AWJ-Te-XYf" userLabel="CheckLabel">
+                                                    <rect key="frame" x="610" y="11" width="42" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ThemeLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m39-jm-pWh">
+                                                    <rect key="frame" x="142" y="11" width="200" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="CheckLabel" destination="AWJ-Te-XYf" id="uHZ-eb-gjx"/>
                                             <outlet property="ThemeImageView" destination="ggz-rV-9cz" id="QWi-0h-uQj"/>
+                                            <outlet property="ThemeLabel" destination="m39-jm-pWh" id="Hb3-cd-f6k"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AdvancedSettingCell" id="TN0-1L-0rH" customClass="SwitchTableViewCell" customModule="put_clock" customModuleProvider="target">
@@ -250,6 +256,24 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IRK-91-xT3" userLabel="ApplyButton">
+                                <rect key="frame" x="617" y="46" width="31" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="適用"/>
+                                <connections>
+                                    <action selector="ApplyButton:" destination="2M8-Y4-Yit" eventType="touchUpInside" id="Djv-gv-tUF"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="48r-en-5qD">
+                                <rect key="frame" x="590" y="0.0" width="77" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="77" id="mW9-lw-ybL"/>
+                                </constraints>
+                                <state key="normal" title="２へ移動"/>
+                                <connections>
+                                    <action selector="second:" destination="2M8-Y4-Yit" eventType="touchDown" id="zoy-Dc-t2Q"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -274,7 +298,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mn8-wj-2rs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1362" y="-844"/>
+            <point key="canvasLocation" x="1361.4692653673164" y="-844"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="pT5-wn-20w">
