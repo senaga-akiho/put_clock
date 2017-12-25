@@ -14,9 +14,7 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     @IBOutlet weak var time_label: UILabel!
     @IBOutlet weak var date_label: UILabel!
-    
     @IBOutlet weak var table: UITableView!
-    var table2:UITableView!
     
     var labelArray = [UILabel(), UILabel(), UILabel()]
     var time_bool:Bool = true
@@ -30,9 +28,6 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
         accessApplication()
-//        labelArray[0] = event1
-//        labelArray[1] = event2
-//        labelArray[2] = event3
         //アプリがアクティブになった瞬間に呼び出す
         let goActive = NotificationCenter.default
         goActive.addObserver(
@@ -59,17 +54,6 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    /*
-     スイッチの切り替え時
-     */
-//    @IBAction func `switch`(_ sender: Any) {
-//        if (sender as AnyObject).isOn {
-//            time_bool=true
-//        }else {
-//            time_bool=false
-//        }
-//    }
     
     /*
      時刻の表示
@@ -123,30 +107,6 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             })
         }
     }
-    
-    /*
-     イベントの取得
-     */
-//    func eventGet() {
-//        // イベントストアのインスタンスメソッドで述語を生成.
-//        var predicate = NSPredicate()
-//        predicate = myEventStore.predicateForEvents(withStart: Date()-60*60*24,
-//                                                    end: Date()+60*60*24,
-//                                                    calendars: nil)
-//        // 述語にマッチする全てのイベントをフェッチ.
-//        let events = myEventStore.events(matching: predicate)
-//        // イベントが見つかった.
-//
-//        if !events.isEmpty {
-//            var w=0
-//            for i in events{
-//                //cell.detailTextLabel?.text = i.startDate as! String
-//                w+=1
-//            }
-//        }else{
-//            print("何もない")
-//        }
-//    }
     /*
      ユーザーデフォルトデータを保存
      バックグラウンドになった時に呼び出される
@@ -167,31 +127,29 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
      アプリ起動時に呼べれる関数
      */
     @objc func callAvtive() {
-//        eventGet()
-//        time_switch.setOn(userDefaults.bool(forKey: "time_bool"),animated: false)
-//        time_bool = time_switch.isOn
         // 1秒ごとに「displayClock」を実行する
         let timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(displayClock), userInfo: nil, repeats: true)
+        let time2 = Timer.scheduledTimer(timeInterval: 300, target: self, selector: #selector(Table_Reload), userInfo: nil, repeats: true)
         timer.fire()    // 無くても動くけどこれが無いと初回の実行がラグる
+//        time2.fire()
+        if(setting[3] == false){
+            table.alpha = 0
+        }
+    }
+    @objc func Table_Reload(){
+        table.reloadData()
     }
     func tableView(_ table: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
+        print("テーブルの更新ですよ")
         // イベントストアのインスタンスメソッドで述語を生成.
         var predicate = NSPredicate()
-        predicate = myEventStore.predicateForEvents(withStart: Date()-60*60*24,
+        predicate = myEventStore.predicateForEvents(withStart: Date(),
                                                     end: Date()+60*60*24,
                                                     calendars: nil)
         // 述語にマッチする全てのイベントをフェッチ.
         let events = myEventStore.events(matching: predicate)
-        var w=0
-        if !events.isEmpty {
-                        for i in events{
-                            w+=1
-                        }
-                    }else{
-                        print("何もない")
-                    }
-        return w
+        return events.count
     }
     /*
      画面遷移後に呼ばれる
@@ -204,34 +162,33 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     func tableView(_ table: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("テーブルの更新ですよ2")
         // イベントストアのインスタンスメソッドで述語を生成.
         var predicate = NSPredicate()
-        predicate = myEventStore.predicateForEvents(withStart: Date()-60*60*24,
+        predicate = myEventStore.predicateForEvents(withStart: Date(),
                                                     end: Date()+60*60*24,
                                                     calendars: nil)
         // 述語にマッチする全てのイベントをフェッチ.
         let events = myEventStore.events(matching: predicate)
         // tableCell の ID で UITableViewCell のインスタンスを生成
         let cell = table.dequeueReusableCell(withIdentifier: "eventCell",
-            for: indexPath)
-        print(indexPath)
-        
-        //仮テキスト
-        cell.textLabel?.text = events[indexPath.row].title
-        
-//        print(events[indexPath.row].startDate)
-        let DateUtils = DateFormatter()
-        DateUtils.dateFormat = "HH:mm"
-        let displayTime = DateUtils.string(from: events[indexPath.row].startDate)
-        cell.detailTextLabel?.text = displayTime
-//        cell.textLabel?.text = "情報工学実験4"
-        //cell.detailTextLabel?.text = "14:40 - 17:50"
-        
-        let testDraw = draw(frame: CGRect(x: 0, y: 0,width: 1000, height: 1000))
-        cell.addSubview(testDraw)
-        testDraw.isOpaque = false
-        self.table2 = table
-        
+                                             for: indexPath)
+        if !events.isEmpty {
+            cell.textLabel?.text = events[indexPath.row].title
+            
+            //        print(events[indexPath.row].startDate)
+            let DateUtils = DateFormatter()
+            DateUtils.dateFormat = "HH:mm"
+            let displayTime = DateUtils.string(from: events[indexPath.row].startDate)
+            cell.detailTextLabel?.text = displayTime
+            //        cell.textLabel?.text = "情報工学実験4"
+            //cell.detailTextLabel?.text = "14:40 - 17:50"
+            
+            let testDraw = draw(frame: CGRect(x: 0, y: 0,width: 1000, height: 1000))
+            cell.addSubview(testDraw)
+            testDraw.isOpaque = false
+            return cell
+        }
         return cell
     }
     

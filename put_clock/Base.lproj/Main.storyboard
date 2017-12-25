@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="23k-Ef-OIg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="23k-Ef-OIg">
     <device id="retina4_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -337,6 +337,8 @@
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="Ename_label" destination="MGW-SX-DYi" id="RVB-ZT-3ga"/>
+                        <outlet property="Etime_label" destination="Cyi-jW-osm" id="Kxq-ai-WQA"/>
                         <outlet property="date_label" destination="IkB-Xj-85G" id="mgT-TQ-xW5"/>
                         <outlet property="time_label" destination="3LN-ad-dwW" id="Pk1-fH-3z8"/>
                     </connections>
@@ -355,6 +357,6 @@
         <image name="theme1.png" width="1600" height="768"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="a80-0v-xtg"/>
+        <segue reference="nUc-en-NlL"/>
     </inferredMetricsTieBreakers>
 </document>

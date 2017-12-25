@@ -15,6 +15,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var time_label: UILabel!
     @IBOutlet weak var date_label: UILabel!
     
+    @IBOutlet weak var Ename_label: UILabel!
+    @IBOutlet weak var Etime_label: UILabel!
     var labelArray = [UILabel(), UILabel(), UILabel()]
     var display_width:CGFloat = 0.0
     var display_height:CGFloat = 0.0
@@ -73,6 +75,7 @@ class ViewController: UIViewController {
              時刻の表示
          */
     @objc func displayClock() {
+//        print("ディスプレイクロック動いてますよ")
         let time_formatter = DateFormatter()
         //日付を表示
         let date_formatter = DateFormatter()
@@ -147,10 +150,11 @@ class ViewController: UIViewController {
     /*
      イベントの取得
      */
-    func eventGet() {
+    @objc func eventGet() {
+//        print("いゔぇんとげっとうごいてますよ")
         // イベントストアのインスタンスメソッドで述語を生成.
         var predicate = NSPredicate()
-        predicate = myEventStore.predicateForEvents(withStart: Date()-60*60*24,
+        predicate = myEventStore.predicateForEvents(withStart: Date(),
                                                     end: Date()+60*60*24,
                                                     calendars: nil)
         // 述語にマッチする全てのイベントをフェッチ.
@@ -160,6 +164,14 @@ class ViewController: UIViewController {
         if !events.isEmpty {
             var w=0
             for i in events{
+                if(w==0){
+                    Ename_label.text=i.title
+                    let DateUtils = DateFormatter()
+                    DateUtils.dateFormat = "HH:mm"
+                    let displayTime = DateUtils.string(from: i.startDate)
+                    Etime_label.text=displayTime
+                    w=w+1
+                }
             }
         }else{
             print("何もない")
@@ -188,10 +200,16 @@ class ViewController: UIViewController {
     @objc func callAvtive() {
         GetSetting()
         eventGet()
+        // 一定間隔で実行
+        let time2 = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(eventGet), userInfo: nil, repeats: true)
         // 1秒ごとに「displayClock」を実行する
         let timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(displayClock), userInfo: nil, repeats: true)
-        
         timer.fire()    // 無くても動くけどこれが無いと初回の実行がラグる
+        time2.fire()
+        if(setting[3] == false){
+            Ename_label.alpha = 0
+            Etime_label.alpha = 0
+        }
     }
     /*
      画面遷移後に呼ばれる
