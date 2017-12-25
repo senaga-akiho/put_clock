@@ -60,25 +60,24 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
      */
     @objc func displayClock() {
         let time_formatter = DateFormatter()
-        time_formatter.dateFormat = "hh"
+        time_formatter.dateFormat = "HH mm"
         // 時間を表示
         var displayTime = time_formatter.string(from: Date())    // Date()だけで現在時刻を表す
         //24時間表示か確認
-        print(displayTime.substring(to: displayTime.index(displayTime.startIndex, offsetBy: 2)))
         if(setting[1] == false){
             half_label.alpha = 1
-//            if(setting[0] == true){
-//                half_label.text = "午前"
-//            }else{
-//                half_label.text = "AM"
-//            }
+            if(setting[0] == true){
+                half_label.text = "午前"
+            }else{
+                half_label.text = "AM"
+            }
             if let one_time = Int(displayTime.substring(to: displayTime.index(displayTime.startIndex, offsetBy: 2))) {
                 if(Int(displayTime.substring(to: displayTime.index(displayTime.startIndex, offsetBy: 2)))! > 12) {
-//                    if(setting[0] == true){
-//                        half_label.text = "午後"
-//                    }else{
-//                        half_label.text = "PM"
-//                    }
+                    if(setting[0] == true){
+                        half_label.text = "午後"
+                    }else{
+                        half_label.text = "PM"
+                    }
                     displayTime = time_formatter.string(from: Date()-60*60*12)
                 }
             } else {
@@ -99,7 +98,12 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         
         //日付を表示
         let date_formatter = DateFormatter()
-        date_formatter.dateFormat = "yyyy/MM/dd"
+        if(setting[0] == true){
+            date_formatter.locale = NSLocale(localeIdentifier: "ja_JP") as Locale! as Locale!
+            date_formatter.dateFormat = "yyyy年MM月dd日 E曜日"
+        }else{
+           date_formatter.dateFormat = "yyyy/MM/dd EEE"
+        }
         let displayDate = date_formatter.string(from: Date())
         date_label.text = displayDate
     }
