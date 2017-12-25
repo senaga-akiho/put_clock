@@ -79,37 +79,34 @@ class ViewController: UIViewController {
         let time_formatter = DateFormatter()
         //日付を表示
         let date_formatter = DateFormatter()
-        if(setting[0] && setting[1] && setting[2] && setting[3]){
+        if(setting[0] && setting[2]){
             time_formatter.dateFormat = "HH時mm分ss秒"
             date_formatter.locale = NSLocale(localeIdentifier: "ja_JP") as Locale! as Locale!
             date_formatter.dateFormat = "yyyy年MM月dd日 E曜日"
-        }else if(setting[0]==false && setting[1] && setting[2]){
+        }else if(setting[0]==false && setting[2]){
             time_formatter.dateFormat = "HH:mm:ss"
             date_formatter.dateFormat = "yyyy/MM/dd EEE"
-        }else if(setting[0] && setting[1]==false && setting[2]){
-            time_formatter.dateFormat = "HH時mm分ss秒"
-            date_formatter.locale = NSLocale(localeIdentifier: "ja_JP") as Locale! as Locale!
-            date_formatter.dateFormat = "yyyy年MM月dd日 E曜日"
-        }else if(setting[0] && setting[1] && setting[2]==false){
+        }else if(setting[0] && setting[2]==false){
             time_formatter.dateFormat = "HH時mm分"
             date_formatter.locale = NSLocale(localeIdentifier: "ja_JP") as Locale! as Locale!
             date_formatter.dateFormat = "yyyy年MM月dd日 E曜日"
-        }else if(setting[0]==false && setting[1]==false && setting[2]){
-            time_formatter.dateFormat = "HH:mm:ss"
-            date_formatter.dateFormat = "yyyy/MM/dd EEE"
-        }else if(setting[0]==false && setting[1] && setting[2]==false){
-            time_formatter.dateFormat = "HH:mm"
-            date_formatter.dateFormat = "yyyy/MM/dd EEE"
-        }else if(setting[0] && setting[1]==false && setting[2]==false){
-            time_formatter.dateFormat = "HH時mm分"
-            date_formatter.locale = NSLocale(localeIdentifier: "ja_JP") as Locale! as Locale!
-            date_formatter.dateFormat = "yyyy年MM月dd日 E曜日"
-        }else if(setting[0]==false && setting[1]==false && setting[2]==false){
+        }else if(setting[0]==false && setting[2]==false){
             time_formatter.dateFormat = "HH:mm"
             date_formatter.dateFormat = "yyyy/MM/dd EEE"
         }
-        // 時間を表示
-        var displayTime = time_formatter.string(from: Date())    // Date()だけで現在時刻を表す
+        // 現在時刻を取得
+        var displayTime = time_formatter.string(from: Date())
+        
+        //24時間表示か確認
+        if(setting[1] == false){
+            if let one_time = Int(displayTime.substring(to: displayTime.index(displayTime.startIndex, offsetBy: 2))) {
+                if(Int(displayTime.substring(to: displayTime.index(displayTime.startIndex, offsetBy: 2)))! > 12) {
+                    displayTime = time_formatter.string(from: Date()-60*60*12)
+                }
+            } else {
+                print("変換できません")
+            }
+        }
         // 0から始まる時刻の場合は「 H:MM:SS」形式にする
         if displayTime.hasPrefix("0") {
             // 最初に見つかった0だけ削除(スペース埋め)される

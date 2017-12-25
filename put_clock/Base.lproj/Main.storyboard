@@ -149,6 +149,7 @@
                     </view>
                     <connections>
                         <outlet property="date_label" destination="OV3-PE-pLD" id="soH-Qa-HE9"/>
+                        <outlet property="half_label" destination="1zg-MZ-5pc" id="74v-rS-9tz"/>
                         <outlet property="table" destination="JSC-of-gaJ" id="dcE-lA-kTY"/>
                         <outlet property="time_label" destination="X1A-iz-EEl" id="BAM-Fz-k7M"/>
                     </connections>
@@ -357,6 +358,6 @@
         <image name="theme1.png" width="1600" height="768"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="nUc-en-NlL"/>
+        <segue reference="a80-0v-xtg"/>
     </inferredMetricsTieBreakers>
 </document>

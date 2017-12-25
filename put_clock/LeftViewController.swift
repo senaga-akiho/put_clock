@@ -16,8 +16,8 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     @IBOutlet weak var date_label: UILabel!
     @IBOutlet weak var table: UITableView!
     
+    @IBOutlet weak var half_label: UILabel!
     var labelArray = [UILabel(), UILabel(), UILabel()]
-    var time_bool:Bool = true
     var setting:[Bool] = [true,true,true,true]
     private let myEventStore:EKEventStore = EKEventStore()
     // NSUserDefaultsインスタンスの生成
@@ -60,14 +60,33 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
      */
     @objc func displayClock() {
         let time_formatter = DateFormatter()
-        
-        if(time_bool){
-            time_formatter.dateFormat = "HH mm"
-        }else{
-            time_formatter.dateFormat = "HH mm"
-        }
+        time_formatter.dateFormat = "hh"
         // 時間を表示
         var displayTime = time_formatter.string(from: Date())    // Date()だけで現在時刻を表す
+        //24時間表示か確認
+        print(displayTime.substring(to: displayTime.index(displayTime.startIndex, offsetBy: 2)))
+        if(setting[1] == false){
+            half_label.alpha = 1
+//            if(setting[0] == true){
+//                half_label.text = "午前"
+//            }else{
+//                half_label.text = "AM"
+//            }
+            if let one_time = Int(displayTime.substring(to: displayTime.index(displayTime.startIndex, offsetBy: 2))) {
+                if(Int(displayTime.substring(to: displayTime.index(displayTime.startIndex, offsetBy: 2)))! > 12) {
+//                    if(setting[0] == true){
+//                        half_label.text = "午後"
+//                    }else{
+//                        half_label.text = "PM"
+//                    }
+                    displayTime = time_formatter.string(from: Date()-60*60*12)
+                }
+            } else {
+                print("変換できません")
+            }
+        }else{
+            half_label.alpha = 0
+        }
         // 0から始まる時刻の場合は「 H:MM:SS」形式にする
         if displayTime.hasPrefix("0") {
             // 最初に見つかった0だけ削除(スペース埋め)される
@@ -114,7 +133,6 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     @objc func saveDate()
     {
         print("保存！")
-        userDefaults.set(time_bool, forKey: "time_bool")
     }
     /*
      画面が横になった時に表示される
