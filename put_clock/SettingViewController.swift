@@ -29,6 +29,7 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
             let targetViewController = storyboard!.instantiateViewController(withIdentifier: "Left") as! LeftViewController
             targetViewController.modalTransitionStyle = UIModalTransitionStyle.flipHorizontal
             self.present( targetViewController, animated: true, completion: {
+                targetViewController.SaveSetting(change_setting: self.setting)
                 targetViewController.callAvtive()
             })
         }
@@ -36,6 +37,7 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
             let targetViewController = storyboard!.instantiateViewController(withIdentifier: "View") as! ViewController
             targetViewController.modalTransitionStyle = UIModalTransitionStyle.flipHorizontal
             self.present( targetViewController, animated: true, completion: {
+                targetViewController.SaveSetting(change_setting: self.setting)
                 targetViewController.callAvtive()
             })
         }
