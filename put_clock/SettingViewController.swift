@@ -167,4 +167,6 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
         userDefaults.set(setting[number], forKey: set_num[number])
     }
     
+    @IBAction func backToTop(segue: UIStoryboardSegue) {}
+    
 }

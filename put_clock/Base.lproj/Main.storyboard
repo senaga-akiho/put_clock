@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="23k-Ef-OIg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2M8-Y4-Yit">
     <device id="retina4_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
@@ -12,47 +12,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--First View Controller-->
-        <scene sceneID="I5d-7U-RaX">
-            <objects>
-                <viewController storyboardIdentifier="First" id="23k-Ef-OIg" customClass="FirstViewController" customModule="put_clock" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="BJT-3S-gue">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="theme1.png" translatesAutoresizingMaskIntoConstraints="NO" id="VyA-nG-45e">
-                                <rect key="frame" x="268.5" y="57.5" width="130" height="130"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="130" id="4QV-hf-09p"/>
-                                    <constraint firstAttribute="width" constant="130" id="Poi-DG-PWv"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Smart Clock" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YPZ-T0-ORj">
-                                <rect key="frame" x="212.5" y="194.5" width="242" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="DpJ-dy-evS"/>
-                                    <constraint firstAttribute="width" constant="242" id="Tez-ne-rMZ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="50"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" red="0.93323183060000003" green="0.93339174989999996" blue="0.93322181699999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="YPZ-T0-ORj" firstAttribute="centerX" secondItem="VyA-nG-45e" secondAttribute="centerX" id="BCV-E3-QCY"/>
-                            <constraint firstItem="VyA-nG-45e" firstAttribute="centerX" secondItem="BJT-3S-gue" secondAttribute="centerX" id="GXW-AH-zE6"/>
-                            <constraint firstAttribute="centerY" secondItem="VyA-nG-45e" secondAttribute="bottom" id="H3l-vW-yhp"/>
-                            <constraint firstItem="YPZ-T0-ORj" firstAttribute="top" secondItem="VyA-nG-45e" secondAttribute="bottom" constant="7" id="cZc-ze-GbO"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="Q4Y-VW-CgU"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="2xV-7U-z5v"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bCp-Li-QQF" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-227" y="-598"/>
-        </scene>
         <!--Left View Controller-->
         <scene sceneID="syt-hU-FED">
             <objects>
@@ -153,9 +112,10 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dRc-Pf-f7J" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="qHN-wE-jxg" userLabel="Exit" sceneMemberID="exit"/>
                 <tapGestureRecognizer id="RUh-Rc-CO4">
                     <connections>
-                        <segue destination="2M8-Y4-Yit" kind="show" id="a80-0v-xtg"/>
+                        <segue destination="qHN-wE-jxg" kind="unwind" unwindAction="backToTopWithSegue:" id="eYf-Zn-wf2"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -279,7 +239,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mn8-wj-2rs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1359.6701649175413" y="-845.60000000000002"/>
+            <point key="canvasLocation" x="-224" y="-617"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="pT5-wn-20w">
@@ -352,19 +312,14 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m2S-5j-EsC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="FCf-Gb-OO2" userLabel="Exit" sceneMemberID="exit"/>
                 <tapGestureRecognizer id="o06-CX-dhq">
                     <connections>
-                        <segue destination="2M8-Y4-Yit" kind="show" id="nUc-en-NlL"/>
+                        <segue destination="FCf-Gb-OO2" kind="unwind" unwindAction="backToTopWithSegue:" id="dY1-Rt-656"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="510" y="-108"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="theme1.png" width="1600" height="768"/>
-    </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="a80-0v-xtg"/>
-    </inferredMetricsTieBreakers>
 </document>
