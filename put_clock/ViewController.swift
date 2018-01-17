@@ -17,7 +17,6 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var Ename_label: UILabel!
     @IBOutlet weak var Etime_label: UILabel!
-    @IBOutlet weak var half_label: UILabel!
     var labelArray = [UILabel(), UILabel(), UILabel()]
     var display_width:CGFloat = 0.0
     var display_height:CGFloat = 0.0
@@ -98,28 +97,27 @@ class ViewController: UIViewController {
         // 現在時刻を取得
         var displayTime = time_formatter.string(from: Date())
         
+        var ampm:String = ""
+        
         //24時間表示か確認
         if(setting[1] == false){
-            half_label.alpha = 1
             if(setting[0] == true){
-                half_label.text = "午前"
+                ampm = "午前"
             }else{
-                half_label.text = "AM"
+                ampm = "AM "
             }
             if let one_time = Int(displayTime.substring(to: displayTime.index(displayTime.startIndex, offsetBy: 2))) {
                 if(Int(displayTime.substring(to: displayTime.index(displayTime.startIndex, offsetBy: 2)))! > 12) {
                     if(setting[0] == true){
-                        half_label.text = "午後"
+                        ampm = "午後"
                     }else{
-                        half_label.text = "PM"
+                        ampm = "PM "
                     }
                     displayTime = time_formatter.string(from: Date()-60*60*12)
                 }
             } else {
                 print("変換できません")
             }
-        }else{
-            half_label.alpha = 0
         }
         // 0から始まる時刻の場合は「 H:MM:SS」形式にする
         if displayTime.hasPrefix("0") {
@@ -128,6 +126,9 @@ class ViewController: UIViewController {
                 displayTime.replaceSubrange(range, with: " ")
             }
         }
+        
+        displayTime = ampm + displayTime
+        
         // ラベルに表示
         time_label.text = displayTime
         

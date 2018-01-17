@@ -319,13 +319,6 @@
                                 <color key="textColor" red="3.1578285420000001e-05" green="0.67914682630000001" blue="0.71021193270000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FNV-F9-eDb">
-                                <rect key="frame" x="312" y="101" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.93323183060000003" green="0.93339174989999996" blue="0.93322181699999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
@@ -355,7 +348,6 @@
                         <outlet property="Ename_label" destination="MGW-SX-DYi" id="RVB-ZT-3ga"/>
                         <outlet property="Etime_label" destination="Cyi-jW-osm" id="Kxq-ai-WQA"/>
                         <outlet property="date_label" destination="IkB-Xj-85G" id="mgT-TQ-xW5"/>
-                        <outlet property="half_label" destination="FNV-F9-eDb" id="7Dr-eC-ft3"/>
                         <outlet property="time_label" destination="3LN-ad-dwW" id="Pk1-fH-3z8"/>
                     </connections>
                 </viewController>
