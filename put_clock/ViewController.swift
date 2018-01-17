@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var time_label: UILabel!
     @IBOutlet weak var date_label: UILabel!
+    @IBOutlet weak var second_label: UILabel!
     
     @IBOutlet weak var Ename_label: UILabel!
     @IBOutlet weak var Etime_label: UILabel!
@@ -79,12 +80,15 @@ class ViewController: UIViewController {
         let time_formatter = DateFormatter()
         //日付を表示
         let date_formatter = DateFormatter()
+        let second_formatter = DateFormatter()
         if(setting[0] && setting[2]){
-            time_formatter.dateFormat = "HH時mm分ss秒"
+            time_formatter.dateFormat = "HH時mm分"
+            second_formatter.dateFormat = "ss秒"
             date_formatter.locale = NSLocale(localeIdentifier: "ja_JP") as Locale! as Locale!
             date_formatter.dateFormat = "yyyy年MM月dd日 E曜日"
         }else if(setting[0]==false && setting[2]){
-            time_formatter.dateFormat = "HH:mm:ss"
+            time_formatter.dateFormat = "HH:mm"
+            second_formatter.dateFormat = ":ss"
             date_formatter.dateFormat = "yyyy/MM/dd EEE"
         }else if(setting[0] && setting[2]==false){
             time_formatter.dateFormat = "HH時mm分"
@@ -96,6 +100,7 @@ class ViewController: UIViewController {
         }
         // 現在時刻を取得
         var displayTime = time_formatter.string(from: Date())
+        let secondTime = second_formatter.string(from: Date())
         
         var ampm:String = ""
         
@@ -131,6 +136,7 @@ class ViewController: UIViewController {
         
         // ラベルに表示
         time_label.text = displayTime
+        second_label.text = secondTime
         
         let displayDate = date_formatter.string(from: Date())
         date_label.text = displayDate
