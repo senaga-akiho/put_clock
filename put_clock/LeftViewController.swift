@@ -1,14 +1,5 @@
-//
-//  ViewController.swift
-//  put_clock
-//
-//  Created by 瀬長顕穂 on 2017/10/24.
-//  Copyright © 2017年 table clock. All rights reserved.
-//
-
 import UIKit
 import EventKit
-
 
 class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
@@ -18,16 +9,24 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     @IBOutlet weak var half_label: UILabel!
     var labelArray = [UILabel(), UILabel(), UILabel()]
-    var setting:[Bool] = [true,true,true,true]
+    var setting:[Bool] = [true,true,true,true,false,false,false]
     private let myEventStore:EKEventStore = EKEventStore()
     // NSUserDefaultsインスタンスの生成
     let userDefaults = UserDefaults.standard
+    
+    let manage🖍 = color_switch()
+    
     /*
      一番最初に呼ばれる
      */
     override func viewDidLoad() {
         super.viewDidLoad()
         accessApplication()
+        
+        manage🖍.mainColorItem = [time_label,half_label,date_label]
+        manage🖍.subColorItem = []
+        manage🖍.bg = self.view
+        
         //アプリがアクティブになった瞬間に呼び出す
         let goActive = NotificationCenter.default
         goActive.addObserver(
@@ -49,6 +48,11 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             selector: #selector(screenMove),
             name:NSNotification.Name.UIApplicationDidChangeStatusBarFrame,
             object: nil)
+        //バックライトの明るさが変わったら呼び出す
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(screenBrightnessDidChange(_:)),
+                                               name: NSNotification.Name.UIScreenBrightnessDidChange,
+                                               object: nil)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -157,6 +161,17 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         if(setting[3] == false){
             table.alpha = 0
         }
+        //昼夜モード、配色パターン読み込む
+        if setting[4]{
+            manage🖍.dayNightChange("night")
+        }else{
+            manage🖍.dayNightChange("day")
+        }
+        
+        if setting[6]{
+            manage🖍.colorThemeChange(colorTheme: "color1")
+        }
+
     }
     @objc func Table_Reload(){
         table.reloadData()
@@ -203,6 +218,8 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             DateUtils.dateFormat = "HH:mm"
             let displayTime = DateUtils.string(from: events[indexPath.row].startDate)
             cell.detailTextLabel?.text = displayTime
+            cell.textLabel?.textColor = UIColor(named: "color2/day1")
+            //table.dequeueReusableCell(withIdentifier: "eventCell")?.textLabel?.textColor = UIColor(named: "color2/day1")
             //        cell.textLabel?.text = "情報工学実験4"
             //cell.detailTextLabel?.text = "14:40 - 17:50"
             
@@ -212,6 +229,16 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             return cell
         }
         return cell
+    }
+    
+    @objc func screenBrightnessDidChange(_ notification: Notification) {
+        if setting[5] == false {return;}
+        if UIScreen.main.brightness < 0.5{
+            manage🖍.🔅🌙 = "night"
+        }else{
+            manage🖍.🔅🌙 = "day"
+        }
+        manage🖍.colorReload()
     }
     
     override var prefersStatusBarHidden: Bool {

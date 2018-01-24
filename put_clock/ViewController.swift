@@ -1,14 +1,5 @@
-//
-//  ViewController.swift
-//  put_clock
-//
-//  Created by 瀬長顕穂 on 2017/10/24.
-//  Copyright © 2017年 table clock. All rights reserved.
-//
-
 import UIKit
 import EventKit
-
 
 class ViewController: UIViewController {
     
@@ -22,8 +13,11 @@ class ViewController: UIViewController {
     var display_width:CGFloat = 0.0
     var display_height:CGFloat = 0.0
     private let myEventStore:EKEventStore = EKEventStore()
-    var setting:[Bool] = [true,true,true,true]
-    var set_num:[String] = ["one","two","three","fore"]
+    var setting:[Bool] = [true,true,true,true,false,false,false]
+    var set_num:[String] = ["one","two","three","fore","five","six","seven"]
+    let colorManagement = color_switch()
+    
+    
     // NSUserDefaultsインスタンスの生成
     let userDefaults = UserDefaults.standard
     /*
@@ -32,6 +26,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         accessApplication()
+        
+        colorManagement.mainColorItem = [time_label,date_label,Ename_label]
+        colorManagement.subColorItem = [Etime_label,second_label]
+        colorManagement.bg = self.view
+        
         display_width = self.view.bounds.width
         display_height = self.view.bounds.height
         //アプリがアクティブになった瞬間に呼び出す
@@ -55,7 +54,15 @@ class ViewController: UIViewController {
             selector: #selector(screenMove),
             name:NSNotification.Name.UIApplicationDidChangeStatusBarFrame,
             object: nil)
+        
+        //バックライトの明るさが変わったら呼び出す
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(screenBrightnessDidChange(_:)),
+                                               name: NSNotification.Name.UIScreenBrightnessDidChange,
+                                               object: nil)
+        
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -228,6 +235,16 @@ class ViewController: UIViewController {
             Ename_label.alpha = 0
             Etime_label.alpha = 0
         }
+        //昼夜モード、配色パターン読み込む
+        if setting[4]{
+            colorManagement.dayNightChange("night")
+        }else{
+            colorManagement.dayNightChange("day")
+        }
+        
+        if setting[6]{
+            colorManagement.colorThemeChange(colorTheme: "color1")
+        }
     }
     /*
      画面遷移後に呼ばれる
@@ -251,6 +268,19 @@ class ViewController: UIViewController {
         }
     }
     
+    //明るさが一定閾値を超えたらday,night変更
+    @objc func screenBrightnessDidChange(_ notification: Notification) {
+        if setting[5] == false {return;}
+        if UIScreen.main.brightness < 0.5{//実際には0.2ぐらいが良さそう
+            colorManagement.🔅🌙 = "night"
+        }else{
+            colorManagement.🔅🌙 = "day"
+        }
+        colorManagement.colorReload()
+        print("明るさ変わった->",UIScreen.main.brightness)
+    }
+    
+    //ステータスバーを非表示にする(ipadの横画面だとこれが必要)
     override var prefersStatusBarHidden: Bool {
         return true
     }

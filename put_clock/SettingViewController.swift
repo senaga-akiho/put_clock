@@ -1,17 +1,9 @@
-//
-//  ViewController.swift
-//  put_clock
-//
-//  Created by 瀬長顕穂 on 2017/10/24.
-//  Copyright © 2017年 table clock. All rights reserved.
-//
-
 import UIKit
 import EventKit
 
 class SettingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    var setting:[Bool] = [true,true,true,true]
-    var set_num:[String] = ["one","two","three","fore"]
+    var setting:[Bool] = [true,true,true,true,false,false,false]
+    var set_num:[String] = ["one","two","three","fore","five","six","seven"]
     var selectedtheme = 0;
     // NSUserDefaultsインスタンスの生成
     let userDefaults = UserDefaults.standard
@@ -41,28 +33,15 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
                 targetViewController.callAvtive()
             })
         }
+        else if(selectedtheme == 2){
+            let targetViewController = storyboard!.instantiateViewController(withIdentifier: "Only") as! onlyViewController
+            targetViewController.modalTransitionStyle = UIModalTransitionStyle.flipHorizontal
+            self.present( targetViewController, animated: true, completion: {
+                targetViewController.SaveSetting(change_setting: self.setting)
+                targetViewController.callAvtive()
+            })
+        }
     }
-    /*
-    //FirstViewへ移動して，１（View）に移動
-    @IBAction func aaa(_ sender: Any) {
-        //self.ViewController.callAvtive()
-        let targetViewController = storyboard!.instantiateViewController(withIdentifier: "Left") as! LeftViewController
-        targetViewController.modalTransitionStyle = UIModalTransitionStyle.flipHorizontal
-        self.present( targetViewController, animated: true, completion: {
-            targetViewController.SaveSetting(change_setting: self.setting)
-            targetViewController.callAvtive()
-        })
-    }
-    //FirstViewへ移動して，２（SecondView）に移動
-    @IBAction func second(_ sender: Any) {
-        let targetViewController = storyboard!.instantiateViewController(withIdentifier: "View") as! ViewController
-        targetViewController.modalTransitionStyle = UIModalTransitionStyle.flipHorizontal
-        self.present( targetViewController, animated: true, completion: {
-            targetViewController.SaveSetting(change_setting: self.setting)
-            targetViewController.callAvtive()
-        })
-    }
-    */
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -70,8 +49,8 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     @IBOutlet weak var SettingTableView: UITableView!
-    let contents = [["テーマ1", "テーマ2"], ["日本語表示", "24時間表示", "秒単位表示", "カレンダーイベント表示"]]
-    let images = ["theme1.png", "theme2.png"]
+    let contents = [["テーマ1", "テーマ2","時刻のみ"], ["日本語表示", "24時間表示", "秒単位表示", "カレンダーイベント表示","夜テーマ","環境光による昼夜モードの自動切り替え","緑ベースの配色にする"]]
+    let images = ["theme1.png", "theme2.png","timeonly.png"]
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return contents.count
@@ -170,3 +149,4 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBAction func backToTop(segue: UIStoryboardSegue) {}
     
 }
+

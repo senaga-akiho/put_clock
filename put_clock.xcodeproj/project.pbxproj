@@ -22,6 +22,9 @@
 		96A54D211FCC1A09001EA499 /* theme2.png in Resources */ = {isa = PBXBuildFile; fileRef = 96A54D201FCC1A09001EA499 /* theme2.png */; };
 		96A54D251FCC1A2B001EA499 /* theme1.png in Resources */ = {isa = PBXBuildFile; fileRef = 96A54D241FCC1A2B001EA499 /* theme1.png */; };
 		96FDA7C21FAC5F3B00A92743 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FDA7C11FAC5F3B00A92743 /* SettingViewController.swift */; };
+		C6B84E732017873600BCE281 /* color_switch.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B84E722017873600BCE281 /* color_switch.swift */; };
+		C6B84E752017897E00BCE281 /* onlyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B84E742017897E00BCE281 /* onlyViewController.swift */; };
+		C6B84E7720178AA000BCE281 /* timeonly.png in Resources */ = {isa = PBXBuildFile; fileRef = C6B84E7620178A9F00BCE281 /* timeonly.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +66,9 @@
 		96A54D201FCC1A09001EA499 /* theme2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = theme2.png; sourceTree = SOURCE_ROOT; };
 		96A54D241FCC1A2B001EA499 /* theme1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = theme1.png; sourceTree = SOURCE_ROOT; };
 		96FDA7C11FAC5F3B00A92743 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		C6B84E722017873600BCE281 /* color_switch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = color_switch.swift; sourceTree = "<group>"; };
+		C6B84E742017897E00BCE281 /* onlyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = onlyViewController.swift; sourceTree = "<group>"; };
+		C6B84E7620178A9F00BCE281 /* timeonly.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timeonly.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,7 +122,10 @@
 				968920121F9F405800484F22 /* AppDelegate.swift */,
 				968920141F9F405800484F22 /* ViewController.swift */,
 				96FDA7C11FAC5F3B00A92743 /* SettingViewController.swift */,
+				C6B84E742017897E00BCE281 /* onlyViewController.swift */,
+				C6B84E722017873600BCE281 /* color_switch.swift */,
 				968920161F9F405800484F22 /* Main.storyboard */,
+				C6B84E7620178A9F00BCE281 /* timeonly.png */,
 				968920191F9F405800484F22 /* Assets.xcassets */,
 				9689201B1F9F405800484F22 /* LaunchScreen.storyboard */,
 				9689201E1F9F405800484F22 /* Info.plist */,
@@ -258,6 +267,7 @@
 			files = (
 				96A54D251FCC1A2B001EA499 /* theme1.png in Resources */,
 				9689201D1F9F405800484F22 /* LaunchScreen.storyboard in Resources */,
+				C6B84E7720178AA000BCE281 /* timeonly.png in Resources */,
 				96A54D211FCC1A09001EA499 /* theme2.png in Resources */,
 				9689201A1F9F405800484F22 /* Assets.xcassets in Resources */,
 				968920181F9F405800484F22 /* Main.storyboard in Resources */,
@@ -289,8 +299,10 @@
 				965C36341FCCF27700926119 /* SwitchTableViewCell.swift in Sources */,
 				96A54D1F1FCC17C3001EA499 /* ThemeTableViewCell.swift in Sources */,
 				96FDA7C21FAC5F3B00A92743 /* SettingViewController.swift in Sources */,
+				C6B84E752017897E00BCE281 /* onlyViewController.swift in Sources */,
 				96A54D191FCC0B4B001EA499 /* LeftViewController.swift in Sources */,
 				968920151F9F405800484F22 /* ViewController.swift in Sources */,
+				C6B84E732017873600BCE281 /* color_switch.swift in Sources */,
 				96A54D1B1FCC0F6C001EA499 /* draw.swift in Sources */,
 				968920131F9F405800484F22 /* AppDelegate.swift in Sources */,
 			);
