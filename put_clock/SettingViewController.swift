@@ -2,58 +2,27 @@ import UIKit
 import EventKit
 
 class SettingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    var setting:[Bool] = [true,true,true,true,false,false,false]
-    var set_num:[String] = ["one","two","three","fore","five","six","seven"]
-    var selectedtheme = 0;
-    // NSUserDefaultsインスタンスの生成
-    let userDefaults = UserDefaults.standard
-    
-    /*
-     一番最初に呼ばれる
-     */
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+    let s設定管理 = settingManage()
     
     //画面遷移
     @IBAction func ApplyButton(_ sender: Any) {
-        if (selectedtheme == 0){
+        if (s設定管理.選択されたテーマ == .左右分割){
             let targetViewController = storyboard!.instantiateViewController(withIdentifier: "Left") as! LeftViewController
-            targetViewController.modalTransitionStyle = UIModalTransitionStyle.flipHorizontal
-            self.present( targetViewController, animated: true, completion: {
-                targetViewController.SaveSetting(change_setting: self.setting)
-                targetViewController.callAvtive()
-            })
+            self.present( targetViewController, animated: true)
         }
-        else if(selectedtheme == 1){
+        else if(s設定管理.選択されたテーマ == .スタンダード){
             let targetViewController = storyboard!.instantiateViewController(withIdentifier: "View") as! ViewController
-            targetViewController.modalTransitionStyle = UIModalTransitionStyle.flipHorizontal
-            self.present( targetViewController, animated: true, completion: {
-                targetViewController.SaveSetting(change_setting: self.setting)
-                targetViewController.callAvtive()
-            })
-        }
-        else if(selectedtheme == 2){
+            self.present( targetViewController, animated: true)
+        }else if(s設定管理.選択されたテーマ == .シンプル){
             let targetViewController = storyboard!.instantiateViewController(withIdentifier: "Only") as! onlyViewController
-            targetViewController.modalTransitionStyle = UIModalTransitionStyle.flipHorizontal
-            self.present( targetViewController, animated: true, completion: {
-                targetViewController.SaveSetting(change_setting: self.setting)
-                targetViewController.callAvtive()
-            })
+            self.present( targetViewController, animated: true)
         }
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBOutlet weak var SettingTableView: UITableView!
-    let contents = [["テーマ1", "テーマ2","時刻のみ"], ["日本語表示", "24時間表示", "秒単位表示", "カレンダーイベント表示","夜テーマ","環境光による昼夜モードの自動切り替え","緑ベースの配色にする"]]
-    let images = ["theme1.png", "theme2.png","timeonly.png"]
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return contents.count
+        return 2
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -68,18 +37,18 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(section == 0){
-            return contents[0].count
+            return s設定管理.テーマ設定.count
         }
         else if(section == 1){
-            return contents[1].count
+            return s設定管理.個別設定.count
         }
         return 0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if(indexPath.section == 0){
-            selectedtheme = indexPath.row
-            print(selectedtheme)
+            s設定管理.選択されたテーマ = s設定管理.テーマ設定[indexPath.row].theme!
+            s設定管理.設定値を保存(変更するkey: "選択中のテーマ", 保存する値:  s設定管理.テーマ設定[indexPath.row].theme?.rawValue as! String)
             self.SettingTableView.reloadSections([indexPath.section], with: UITableViewRowAnimation.fade)
         }
         return
@@ -100,27 +69,29 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         if(indexPath.section == 0){
             themecell = SettingTableView.dequeueReusableCell(withIdentifier: "ThemeCell", for: indexPath) as! ThemeTableViewCell
-            themecell.ThemeImageView.image = UIImage(named: images[indexPath.row])
-            if (indexPath.row == selectedtheme){
+            themecell.ThemeImageView.image = UIImage(named: s設定管理.テーマ設定[indexPath.row].image!)
+            
+            if (s設定管理.テーマ設定[indexPath.row].theme == s設定管理.選択されたテーマ){
                 themecell.CheckLabel.text = "✔️"
+//                s設定管理.設定値を保存(変更するkey: "選択中のテーマ", 保存する値:  s設定管理.テーマ設定[indexPath.row].theme?.rawValue)
             }
             else {
                 themecell.CheckLabel.text = ""
             }
-            themecell.ThemeLabel.text = contents[indexPath.section][indexPath.row]
+            themecell.ThemeLabel.text = s設定管理.テーマ設定[indexPath.row].theme?.rawValue
             
             return themecell
         }
         else{
-            if ((userDefaults.object(forKey: set_num[indexPath.row])) == nil) {
-                userDefaults.set(setting[indexPath.row],forKey:set_num[indexPath.row])
-            }
-            setting[indexPath.row] = userDefaults.bool(forKey: set_num[indexPath.row])
+//            if ((userDefaults.object(forKey: set_num[indexPath.row])) == nil) {
+//                userDefaults.set(setting[indexPath.row],forKey:set_num[indexPath.row])
+//            }
+//            setting[indexPath.row] = uD.bool(forKey: set_num[indexPath.row])
             advancedsettingcell = SettingTableView.dequeueReusableCell(withIdentifier: "AdvancedSettingCell", for: indexPath) as! SwitchTableViewCell
-            advancedsettingcell.textLabel?.text = contents[indexPath.section][indexPath.row]
+            advancedsettingcell.textLabel?.text = s設定管理.個別設定[indexPath.row].name?.rawValue
             advancedsettingcell.textLabel?.backgroundColor = .clear
             advancedsettingcell.swtich.addTarget(self, action: #selector(checkButtonTapped), for: UIControlEvents.valueChanged)
-            advancedsettingcell.swtich.setOn(setting[indexPath.row], animated: false)
+            advancedsettingcell.swtich.setOn(s設定管理.個別設定[indexPath.row].onOff,animated: false)
             
             return advancedsettingcell
         }
@@ -137,16 +108,23 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
         let hoge = sender.superview?.superview as! SwitchTableViewCell
         let touchIndex = SettingTableView.indexPath(for: hoge)
         print(touchIndex?.row as!Int)
-        let number = touchIndex?.row as!Int
-        if(setting[number] == true){
-            setting[number] = false
-        }else{
-            setting[number] = true
-        }
-        userDefaults.set(setting[number], forKey: set_num[number])
+        s設定管理.個別設定[touchIndex?.row as!Int].onOff = !s設定管理.個別設定[touchIndex?.row as!Int].onOff
+        s設定管理.設定値を保存(変更するkey: s設定管理.個別設定[touchIndex?.row as!Int].name!.rawValue, 保存する値: s設定管理.個別設定[touchIndex?.row as!Int].onOff)
+        
     }
     
     @IBAction func backToTop(segue: UIStoryboardSegue) {}
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        print("viewWillDisAppearです")
+//        uD.set(s設定管理, forKey: "設定の値")
+
+        //        print("viewWillDisAppearです")
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+    }
 }
 
