@@ -57,8 +57,16 @@ class settingManage{
             個別設定.append(.init(表示する設定項目の順番[i]))
             個別設定[i].onOff = uD.bool(forKey: 表示する設定項目の順番[i].rawValue)
         }
-        テーマ設定=[.init(.左右分割, "theme1.png"),.init(.スタンダード, "theme2.png"),.init(.シンプル, "timeonly.png")]
-        選択されたテーマ = テーマ情報.タイトル(rawValue: uD.string(forKey: "選択中のテーマ")!)!
+        テーマ設定=[
+            .init(.左右分割, "theme1.png"),
+            .init(.スタンダード, "theme2.png"),
+            .init(.シンプル, "timeonly.png")
+        ]
+        for i in テーマ設定{
+            if i.theme?.rawValue == uD.string(forKey: "選択中のテーマ"){
+                選択されたテーマ = i.theme!
+            }
+        }
     }
     
     func 設定値を保存(変更するkey:String,保存する値:Any){
