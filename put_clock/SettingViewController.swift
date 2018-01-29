@@ -6,14 +6,14 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     //画面遷移
     @IBAction func ApplyButton(_ sender: Any) {
-        if (s設定管理.選択されたテーマ == .左右分割){
+        if (s設定管理.選択されたテーマのタイトル == .左右分割){
             let targetViewController = storyboard!.instantiateViewController(withIdentifier: "Left") as! LeftViewController
             self.present( targetViewController, animated: true)
         }
-        else if(s設定管理.選択されたテーマ == .スタンダード){
+        else if(s設定管理.選択されたテーマのタイトル == .スタンダード){
             let targetViewController = storyboard!.instantiateViewController(withIdentifier: "View") as! ViewController
             self.present( targetViewController, animated: true)
-        }else if(s設定管理.選択されたテーマ == .シンプル){
+        }else if(s設定管理.選択されたテーマのタイトル == .シンプル){
             let targetViewController = storyboard!.instantiateViewController(withIdentifier: "Only") as! onlyViewController
             self.present( targetViewController, animated: true)
         }
@@ -37,18 +37,18 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(section == 0){
-            return s設定管理.テーマ設定.count
+            return s設定管理.テーマ.count
         }
         else if(section == 1){
-            return s設定管理.個別設定.count
+            return s設定管理.設定.count
         }
         return 0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if(indexPath.section == 0){
-            s設定管理.選択されたテーマ = s設定管理.テーマ設定[indexPath.row].theme!
-            s設定管理.設定値を保存(変更するkey: "選択中のテーマ", 保存する値:  s設定管理.テーマ設定[indexPath.row].theme?.rawValue as! String)
+            s設定管理.選択されたテーマのタイトル = s設定管理.テーマ[indexPath.row].タイトル!
+            s設定管理.設定値を保存(変更するkey: "選択中のテーマ", 保存する値:  s設定管理.テーマ[indexPath.row].タイトル?.rawValue as! String)
             self.SettingTableView.reloadSections([indexPath.section], with: UITableViewRowAnimation.fade)
         }
         return
@@ -69,16 +69,16 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         if(indexPath.section == 0){
             themecell = SettingTableView.dequeueReusableCell(withIdentifier: "ThemeCell", for: indexPath) as! ThemeTableViewCell
-            themecell.ThemeImageView.image = UIImage(named: s設定管理.テーマ設定[indexPath.row].image!)
+            themecell.ThemeImageView.image = UIImage(named: s設定管理.テーマ[indexPath.row].画像ファイル名!)
             
-            if (s設定管理.テーマ設定[indexPath.row].theme == s設定管理.選択されたテーマ){
+            if (s設定管理.テーマ[indexPath.row].タイトル == s設定管理.選択されたテーマのタイトル){
                 themecell.CheckLabel.text = "✔️"
 //                s設定管理.設定値を保存(変更するkey: "選択中のテーマ", 保存する値:  s設定管理.テーマ設定[indexPath.row].theme?.rawValue)
             }
             else {
                 themecell.CheckLabel.text = ""
             }
-            themecell.ThemeLabel.text = s設定管理.テーマ設定[indexPath.row].theme?.rawValue
+            themecell.ThemeLabel.text = s設定管理.テーマ[indexPath.row].タイトル?.rawValue
             
             return themecell
         }
@@ -88,10 +88,10 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
 //            }
 //            setting[indexPath.row] = uD.bool(forKey: set_num[indexPath.row])
             advancedsettingcell = SettingTableView.dequeueReusableCell(withIdentifier: "AdvancedSettingCell", for: indexPath) as! SwitchTableViewCell
-            advancedsettingcell.textLabel?.text = s設定管理.個別設定[indexPath.row].name?.rawValue
+            advancedsettingcell.textLabel?.text = s設定管理.設定[indexPath.row].タイトル?.rawValue
             advancedsettingcell.textLabel?.backgroundColor = .clear
             advancedsettingcell.swtich.addTarget(self, action: #selector(checkButtonTapped), for: UIControlEvents.valueChanged)
-            advancedsettingcell.swtich.setOn(s設定管理.個別設定[indexPath.row].onOff,animated: false)
+            advancedsettingcell.swtich.setOn(s設定管理.設定[indexPath.row].設定値,animated: false)
             
             return advancedsettingcell
         }
@@ -108,8 +108,8 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
         let hoge = sender.superview?.superview as! SwitchTableViewCell
         let touchIndex = SettingTableView.indexPath(for: hoge)
         print(touchIndex?.row as!Int)
-        s設定管理.個別設定[touchIndex?.row as!Int].onOff = !s設定管理.個別設定[touchIndex?.row as!Int].onOff
-        s設定管理.設定値を保存(変更するkey: s設定管理.個別設定[touchIndex?.row as!Int].name!.rawValue, 保存する値: s設定管理.個別設定[touchIndex?.row as!Int].onOff)
+        s設定管理.設定[touchIndex?.row as!Int].設定値 = !s設定管理.設定[touchIndex?.row as!Int].設定値
+        s設定管理.設定値を保存(変更するkey: s設定管理.設定[touchIndex?.row as!Int].タイトル!.rawValue, 保存する値: s設定管理.設定[touchIndex?.row as!Int].設定値)
         
     }
     

@@ -74,15 +74,15 @@ class ViewController: UIViewController {
         var ampm:String = ""
         
         //24時間表示か確認
-        if(setting😀.個別設定[0].onOff == false){
-            if(setting😀.個別設定[1].onOff == true){
+        if(setting😀.設定[0].設定値 == false){
+            if(setting😀.設定[1].設定値 == true){
                 ampm = "午前"
             }else{
                 ampm = "AM "
             }
             if let one_time = Int(displayTime.substring(to: displayTime.index(displayTime.startIndex, offsetBy: 2))) {
                 if(Int(displayTime.substring(to: displayTime.index(displayTime.startIndex, offsetBy: 2)))! > 12) {
-                    if(setting😀.個別設定[1].onOff == true){
+                    if(setting😀.設定[1].設定値 == true){
                         ampm = "午後"
                     }else{
                         ampm = "PM "

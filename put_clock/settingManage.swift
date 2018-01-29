@@ -1,70 +1,70 @@
 //設定周りのクラス
 import UIKit
-struct 設定情報 {
+struct 設定仕様 {
     
-    enum 項目タイトル:String{
+    enum タイトル一覧:String{
         case 日本語表示にする
         case 二十四時間表示にする
-        case 秒単位表示
-        case カレンダーイベント表示
-        case 夜テーマ
+        case 秒単位を表示する
+        case カレンダーイベントを非表示にする
+        case 夜テーマにする
         case 環境光による昼夜モードの自動切り替え
         case 緑ベースの配色にする
     }
     
-    var name:項目タイトル?
-    var onOff:Bool = false
+    var タイトル:タイトル一覧?
+    var 設定値:Bool = false
     
-    init(_ a:項目タイトル){
-        self.name = a
+    init(_ a:タイトル一覧){
+        self.タイトル = a
     }
 }
 
-struct テーマ情報 {
-    enum タイトル:String{
+struct テーマ仕様 {
+    enum タイトル一覧:String{
         case 左右分割
         case スタンダード
         case シンプル
     }
     
-    let theme:タイトル?
-    let image:String?
-    init(_ a:タイトル,_ b:String){
-        self.theme = a
-        self.image = b
+    let タイトル:タイトル一覧?
+    let 画像ファイル名:String?
+    init(_ a:タイトル一覧,_ b:String){
+        self.タイトル = a
+        self.画像ファイル名 = b
     }
 }
 
 class settingManage{
-    var 個別設定:[設定情報]
-    var テーマ設定:[テーマ情報]
-    var 選択されたテーマ:テーマ情報.タイトル = .スタンダード
+    var 設定:[設定仕様]
+    var テーマ:[テーマ仕様]
+    var 選択されたテーマのタイトル:テーマ仕様.タイトル一覧 = .スタンダード
     
     let uD = UserDefaults.standard
     
     init() {
-        個別設定 = []
-        let 表示する設定項目の順番:[設定情報.項目タイトル] = [
+        設定 = []
+        let 表示する設定項目の順番:[設定仕様.タイトル一覧] = [
             .二十四時間表示にする,
             .日本語表示にする,
-            .秒単位表示,
-            .カレンダーイベント表示,
-            .夜テーマ,
+            .秒単位を表示する,
+            .カレンダーイベントを非表示にする,
+            .夜テーマにする,
             .環境光による昼夜モードの自動切り替え,
             .緑ベースの配色にする
         ]
         for i in 0 ..< 表示する設定項目の順番.count{
-            個別設定.append(.init(表示する設定項目の順番[i]))
-            個別設定[i].onOff = uD.bool(forKey: 表示する設定項目の順番[i].rawValue)
+            設定.append(.init(表示する設定項目の順番[i]))
+            設定[i].設定値 = uD.bool(forKey: 表示する設定項目の順番[i].rawValue)
         }
-        テーマ設定=[
+        テーマ=[
             .init(.左右分割, "theme1.png"),
             .init(.スタンダード, "theme2.png"),
             .init(.シンプル, "timeonly.png")
         ]
-        for i in テーマ設定{
-            if i.theme?.rawValue == uD.string(forKey: "選択中のテーマ"){
-                選択されたテーマ = i.theme!
+        for i in テーマ{
+            if i.タイトル?.rawValue == uD.string(forKey: "選択中のテーマ"){
+                選択されたテーマのタイトル = i.タイトル!
             }
         }
     }
