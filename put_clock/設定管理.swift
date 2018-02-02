@@ -1,5 +1,6 @@
 //設定周りのクラス
 import UIKit
+
 struct 設定仕様 {
     
     enum タイトル一覧:String{
@@ -15,8 +16,9 @@ struct 設定仕様 {
     var タイトル:タイトル一覧?
     var 設定値:Bool = false
     
-    init(_ a:タイトル一覧){
+    init(_ a:タイトル一覧,_ b:Bool){
         self.タイトル = a
+        self.設定値 = b
     }
 }
 
@@ -28,22 +30,24 @@ struct テーマ仕様 {
     }
     
     let タイトル:タイトル一覧?
-    let 画像ファイル名:String?
-    init(_ a:タイトル一覧,_ b:String){
+    let サムネ画像:UIImage?
+    init(_ a:タイトル一覧,_ b:UIImage){
         self.タイトル = a
-        self.画像ファイル名 = b
+        self.サムネ画像 = b
     }
 }
 
-class settingManage{
-    var 設定:[設定仕様]
+class 設定管理{
+    var 設定:[設定仕様.タイトル一覧:設定仕様]
     var テーマ:[テーマ仕様]
     var 選択されたテーマのタイトル:テーマ仕様.タイトル一覧 = .スタンダード
     
     let uD = UserDefaults.standard
     
+    let 選択されたテーマの保存キー:String = "選択中のテーマ"
+    
     init() {
-        設定 = []
+        設定 = [:]
         let 表示する設定項目の順番:[設定仕様.タイトル一覧] = [
             .二十四時間表示にする,
             .日本語表示にする,
@@ -53,17 +57,18 @@ class settingManage{
             .環境光による昼夜モードの自動切り替え,
             .緑ベースの配色にする
         ]
-        for i in 0 ..< 表示する設定項目の順番.count{
-            設定.append(.init(表示する設定項目の順番[i]))
-            設定[i].設定値 = uD.bool(forKey: 表示する設定項目の順番[i].rawValue)
+        
+        for i in 表示する設定項目の順番{
+            設定 = [i:.init(i,uD.bool(forKey: i.rawValue))]
         }
+        
         テーマ=[
-            .init(.左右分割, "theme1.png"),
-            .init(.スタンダード, "theme2.png"),
-            .init(.シンプル, "timeonly.png")
+            .init(.左右分割,#imageLiteral(resourceName: "theme1")),
+            .init(.スタンダード,#imageLiteral(resourceName: "theme2")),
+            .init(.シンプル,#imageLiteral(resourceName: "timeonly"))
         ]
         for i in テーマ{
-            if i.タイトル?.rawValue == uD.string(forKey: "選択中のテーマ"){
+            if i.タイトル?.rawValue == uD.string(forKey: 選択されたテーマの保存キー){
                 選択されたテーマのタイトル = i.タイトル!
             }
         }

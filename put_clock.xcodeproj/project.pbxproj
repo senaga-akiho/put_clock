@@ -22,7 +22,7 @@
 		96A54D211FCC1A09001EA499 /* theme2.png in Resources */ = {isa = PBXBuildFile; fileRef = 96A54D201FCC1A09001EA499 /* theme2.png */; };
 		96A54D251FCC1A2B001EA499 /* theme1.png in Resources */ = {isa = PBXBuildFile; fileRef = 96A54D241FCC1A2B001EA499 /* theme1.png */; };
 		96FDA7C21FAC5F3B00A92743 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FDA7C11FAC5F3B00A92743 /* SettingViewController.swift */; };
-		C661FED2201D6D2B00E78920 /* settingManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C661FED1201D6D2B00E78920 /* settingManage.swift */; };
+		C661FED2201D6D2B00E78920 /* 設定管理.swift in Sources */ = {isa = PBXBuildFile; fileRef = C661FED1201D6D2B00E78920 /* 設定管理.swift */; };
 		C6B84E732017873600BCE281 /* color_switch.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B84E722017873600BCE281 /* color_switch.swift */; };
 		C6B84E752017897E00BCE281 /* onlyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B84E742017897E00BCE281 /* onlyViewController.swift */; };
 		C6B84E7720178AA000BCE281 /* timeonly.png in Resources */ = {isa = PBXBuildFile; fileRef = C6B84E7620178A9F00BCE281 /* timeonly.png */; };
@@ -67,7 +67,7 @@
 		96A54D201FCC1A09001EA499 /* theme2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = theme2.png; sourceTree = SOURCE_ROOT; };
 		96A54D241FCC1A2B001EA499 /* theme1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = theme1.png; sourceTree = SOURCE_ROOT; };
 		96FDA7C11FAC5F3B00A92743 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
-		C661FED1201D6D2B00E78920 /* settingManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = settingManage.swift; sourceTree = "<group>"; };
+		C661FED1201D6D2B00E78920 /* 設定管理.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "設定管理.swift"; sourceTree = "<group>"; };
 		C6B84E722017873600BCE281 /* color_switch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = color_switch.swift; sourceTree = "<group>"; };
 		C6B84E742017897E00BCE281 /* onlyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = onlyViewController.swift; sourceTree = "<group>"; };
 		C6B84E7620178A9F00BCE281 /* timeonly.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timeonly.png; sourceTree = "<group>"; };
@@ -126,15 +126,15 @@
 				96FDA7C11FAC5F3B00A92743 /* SettingViewController.swift */,
 				C6B84E742017897E00BCE281 /* onlyViewController.swift */,
 				C6B84E722017873600BCE281 /* color_switch.swift */,
-				C661FED1201D6D2B00E78920 /* settingManage.swift */,
+				C661FED1201D6D2B00E78920 /* 設定管理.swift */,
 				968920161F9F405800484F22 /* Main.storyboard */,
 				C6B84E7620178A9F00BCE281 /* timeonly.png */,
 				968920191F9F405800484F22 /* Assets.xcassets */,
+				96A54D201FCC1A09001EA499 /* theme2.png */,
 				9689201B1F9F405800484F22 /* LaunchScreen.storyboard */,
 				9689201E1F9F405800484F22 /* Info.plist */,
 				96A22D9F1FB445B50001792D /* FirstViewController.swift */,
 				96A54D181FCC0B4B001EA499 /* LeftViewController.swift */,
-				96A54D201FCC1A09001EA499 /* theme2.png */,
 				96A54D241FCC1A2B001EA499 /* theme1.png */,
 				96A54D1A1FCC0F6C001EA499 /* draw.swift */,
 				96A54D1E1FCC17C3001EA499 /* ThemeTableViewCell.swift */,
@@ -307,7 +307,7 @@
 				968920151F9F405800484F22 /* ViewController.swift in Sources */,
 				C6B84E732017873600BCE281 /* color_switch.swift in Sources */,
 				96A54D1B1FCC0F6C001EA499 /* draw.swift in Sources */,
-				C661FED2201D6D2B00E78920 /* settingManage.swift in Sources */,
+				C661FED2201D6D2B00E78920 /* 設定管理.swift in Sources */,
 				968920131F9F405800484F22 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -475,10 +475,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-                DEVELOPMENT_TEAM = 4U6NTUN735;
+				DEVELOPMENT_TEAM = 6696GEY228;
 				INFOPLIST_FILE = put_clock/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-                PRODUCT_BUNDLE_IDENTIFIER = "table-clock.put-clock";
+				PRODUCT_BUNDLE_IDENTIFIER = edu.self.putClock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -490,10 +490,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-                DEVELOPMENT_TEAM = 4U6NTUN735;
+				DEVELOPMENT_TEAM = 6696GEY228;
 				INFOPLIST_FILE = put_clock/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-                PRODUCT_BUNDLE_IDENTIFIER = "table-clock.put-clock";
+				PRODUCT_BUNDLE_IDENTIFIER = edu.self.putClock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

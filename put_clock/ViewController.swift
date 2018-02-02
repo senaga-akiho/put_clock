@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     var labelArray = [UILabel(), UILabel(), UILabel()]
     private let myEventStore:EKEventStore = EKEventStore()
     let colorManagement = color_switch()
-    var setting😀 = settingManage()
+    var 💾 = 設定管理()
     /*
          一番最初に呼ばれる
      */
@@ -37,7 +37,7 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("ここまでok?")
-//        setting😀 = uD.object(forKey: "設定の値") as! settingManage
+        
     }
     
     /*
@@ -74,16 +74,16 @@ class ViewController: UIViewController {
         var ampm:String = ""
         
         //24時間表示か確認
-        if(setting😀.設定[0].設定値 == false){
-            if(setting😀.設定[1].設定値 == true){
-                ampm = "午前"
+        if(setting😀.設定[.夜テーマにする]?.設定値 == false){
+           💾😀.設定[.カレンダーイベントを非表示にする]?.設定値 == true){
+               💾前"
             }else{
                 ampm = "AM "
             }
             if let one_time = Int(displayTime.substring(to: displayTime.index(displayTime.startIndex, offsetBy: 2))) {
                 if(Int(displayTime.substring(to: displayTime.index(displayTime.startIndex, offsetBy: 2)))! > 12) {
                     if(setting😀.設定[1].設定値 == true){
-                        ampm = "午後"
+                       💾後"
                     }else{
                         ampm = "PM "
                     }
