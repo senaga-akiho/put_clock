@@ -9,15 +9,9 @@ class onlyViewController: UIViewController {
     
     @IBOutlet weak var kari_label: UILabel!
     
-    var display_width:CGFloat = 0.0
-    var display_height:CGFloat = 0.0
-    var setting:[Bool] = [true,true,true,true,false,false,false]
-    var set_num:[String] = ["one","two","three","fore","five","six","seven"]
+    let s = 設定管理()
     let colorManagement = color_switch()
     
-    // NSUserDefaultsインスタンスの生成
-    let userDefaults = UserDefaults.standard
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,14 +19,6 @@ class onlyViewController: UIViewController {
         colorManagement.subColorItem = [kari_label]
         colorManagement.bg = self.view
         
-        //アプリがアクティブになった瞬間に呼び出す
-        let goActive = NotificationCenter.default
-        goActive.addObserver(
-            self,
-            selector: #selector(callAvtive),
-            name:NSNotification.Name.UIApplicationDidBecomeActive,
-            object: nil)
-        //バックライトの明るさが変わったら呼び出す
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(screenBrightnessDidChange(_:)),
                                                name: NSNotification.Name.UIScreenBrightnessDidChange,
@@ -62,49 +48,27 @@ class onlyViewController: UIViewController {
         second_label.text = second
     }
 
-    @objc func callAvtive() {
-        GetSetting()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         let timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(displayClock), userInfo: nil, repeats: true)
         timer.fire()
         //昼夜モード、配色パターン読み込む
-        if setting[4]{
+        if (s.設定[.夜テーマにする]?.設定値)!{
             colorManagement.dayNightChange("night")
+            kari_label.backgroundColor = UIColor(named: colorManagement.🖍 + "/" + colorManagement.🔅🌙 + "2")
+
         }else{
             colorManagement.dayNightChange("day")
+            kari_label.backgroundColor = UIColor(named: colorManagement.🖍 + "/" + colorManagement.🔅🌙 + "2")
         }
         
-        if setting[6]{
+        if (s.設定[.緑ベースの配色にする]?.設定値)!{
             colorManagement.colorThemeChange(colorTheme: "color1")
         }
-        if setting[4]{
-            kari_label.backgroundColor = UIColor(named: colorManagement.🖍 + "/" + colorManagement.🔅🌙 + "2")
-            
-        }else{
-            kari_label.backgroundColor = UIColor(named: colorManagement.🖍 + "/" + colorManagement.🔅🌙 + "2")
-            
-        }
     }
-
-    @objc func SaveSetting(change_setting:[Bool]) {
-        for i in 0..<change_setting.count {
-            self.setting[i] = change_setting[i]
-            userDefaults.set(setting[i], forKey: set_num[i])
-        }
-    }
-    
-    @objc func GetSetting() {
-        for i in 0..<setting.count {
-            if ((userDefaults.object(forKey: set_num[i])) == nil) {
-                userDefaults.set(setting[i],forKey:set_num[i])
-                print("asga")
-            }
-            setting[i] = userDefaults.bool(forKey: set_num[i])
-        }
-    }
-    
     //明るさが一定閾値を超えたらday,night変更
     @objc func screenBrightnessDidChange(_ notification: Notification) {
-        if setting[5] == false {return;}
+        if s.設定[.夜テーマにする]?.設定値 == false {return;}
         if UIScreen.main.brightness < 0.5{//実際には0.2ぐらいが良さそう
             colorManagement.🔅🌙 = "night"
         }else{

@@ -9,10 +9,9 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     @IBOutlet weak var half_label: UILabel!
     var labelArray = [UILabel(), UILabel(), UILabel()]
-    var setting:[Bool] = [true,true,true,true,false,false,false]
     private let myEventStore:EKEventStore = EKEventStore()
     // NSUserDefaultsインスタンスの生成
-    let userDefaults = UserDefaults.standard
+    let s = 設定管理()
     
     let manage🖍 = color_switch()
     
@@ -26,37 +25,12 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         manage🖍.mainColorItem = [time_label,half_label,date_label]
         manage🖍.subColorItem = []
         manage🖍.bg = self.view
-        
-        //アプリがアクティブになった瞬間に呼び出す
-        let goActive = NotificationCenter.default
-        goActive.addObserver(
-            self,
-            selector: #selector(callAvtive),
-            name:NSNotification.Name.UIApplicationDidBecomeActive,
-            object: nil)
-        //バックグラウンドになった瞬間に呼び出す
-        let goBackGround = NotificationCenter.default
-        goBackGround.addObserver(
-            self,
-            selector: #selector(saveDate),
-            name:NSNotification.Name.UIApplicationDidEnterBackground,
-            object: nil)
-        //画面が横になった直後
-        let screen_move = NotificationCenter.default
-        screen_move.addObserver(
-            self,
-            selector: #selector(screenMove),
-            name:NSNotification.Name.UIApplicationDidChangeStatusBarFrame,
-            object: nil)
+
         //バックライトの明るさが変わったら呼び出す
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(screenBrightnessDidChange(_:)),
                                                name: NSNotification.Name.UIScreenBrightnessDidChange,
                                                object: nil)
-    }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     /*
@@ -68,16 +42,16 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         // 時間を表示
         var displayTime = time_formatter.string(from: Date())    // Date()だけで現在時刻を表す
         //24時間表示か確認
-        if(setting[1] == false){
+        if(s.設定[.二十四時間表示にする]?.設定値 == false){
             half_label.alpha = 1
-            if(setting[0] == true){
+            if(s.設定[.日本語表示にする]?.設定値 == true){
                 half_label.text = "午前"
             }else{
                 half_label.text = "AM"
             }
             if let one_time = Int(displayTime.substring(to: displayTime.index(displayTime.startIndex, offsetBy: 2))) {
                 if(Int(displayTime.substring(to: displayTime.index(displayTime.startIndex, offsetBy: 2)))! > 12) {
-                    if(setting[0] == true){
+                    if(s.設定[.日本語表示にする]?.設定値 == true){
                         half_label.text = "午後"
                     }else{
                         half_label.text = "PM"
@@ -102,7 +76,7 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         
         //日付を表示
         let date_formatter = DateFormatter()
-        if(setting[0] == true){
+        if(s.設定[.日本語表示にする]?.設定値 == true){
             date_formatter.locale = NSLocale(localeIdentifier: "ja_JP") as Locale! as Locale!
             date_formatter.dateFormat = "yyyy年MM月dd日 E曜日"
         }else{
@@ -134,44 +108,31 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             })
         }
     }
-    /*
-     ユーザーデフォルトデータを保存
-     バックグラウンドになった時に呼び出される
-     */
-    @objc func saveDate()
-    {
-        print("保存！")
-    }
-    /*
-     画面が横になった時に表示される
-     */
-    @objc func screenMove() {
-        print("まじか")
-    }
     
     /*
      アプリ起動時に呼べれる関数
      */
-    @objc func callAvtive() {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // 一定間隔で実行
+        let time2 = Timer.scheduledTimer(timeInterval: 30, target: self, selector: #selector(Table_Reload), userInfo: nil, repeats: true)
         // 1秒ごとに「displayClock」を実行する
         let timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(displayClock), userInfo: nil, repeats: true)
-        let time2 = Timer.scheduledTimer(timeInterval: 300, target: self, selector: #selector(Table_Reload), userInfo: nil, repeats: true)
         timer.fire()    // 無くても動くけどこれが無いと初回の実行がラグる
-//        time2.fire()
-        if(setting[3] == false){
+        time2.fire()
+        if (s.設定[.カレンダーイベントを非表示にする]?.設定値)!{
             table.alpha = 0
         }
-        //昼夜モード、配色パターン読み込む
-        if setting[4]{
+        
+        if (s.設定[.夜テーマにする]?.設定値)!{
             manage🖍.dayNightChange("night")
         }else{
             manage🖍.dayNightChange("day")
         }
         
-        if setting[6]{
+        if (s.設定[.緑ベースの配色にする]?.設定値)!{
             manage🖍.colorThemeChange(colorTheme: "color1")
         }
-
     }
     @objc func Table_Reload(){
         table.reloadData()
@@ -187,14 +148,6 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         // 述語にマッチする全てのイベントをフェッチ.
         let events = myEventStore.events(matching: predicate)
         return events.count
-    }
-    /*
-     画面遷移後に呼ばれる
-     */
-    @objc func SaveSetting(change_setting:[Bool]) {
-        for i in 0..<change_setting.count {
-            self.setting[i] = change_setting[i]
-        }
     }
     
     func tableView(_ table: UITableView,
@@ -219,9 +172,6 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             let displayTime = DateUtils.string(from: events[indexPath.row].startDate)
             cell.detailTextLabel?.text = displayTime
             cell.textLabel?.textColor = UIColor(named: "color2/day1")
-            //table.dequeueReusableCell(withIdentifier: "eventCell")?.textLabel?.textColor = UIColor(named: "color2/day1")
-            //        cell.textLabel?.text = "情報工学実験4"
-            //cell.detailTextLabel?.text = "14:40 - 17:50"
             
             let testDraw = draw(frame: CGRect(x: 0, y: 0,width: 1000, height: 1000))
             cell.addSubview(testDraw)
@@ -232,7 +182,8 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     
     @objc func screenBrightnessDidChange(_ notification: Notification) {
-        if setting[5] == false {return;}
+        
+        if s.設定[.夜テーマにする]?.設定値 == false {return;}
         if UIScreen.main.brightness < 0.5{
             manage🖍.🔅🌙 = "night"
         }else{

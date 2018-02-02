@@ -16,7 +16,7 @@
         <!--Left View Controller-->
         <scene sceneID="syt-hU-FED">
             <objects>
-                <viewController storyboardIdentifier="Left" id="dPw-9u-UNB" customClass="LeftViewController" customModule="put_clock" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="左右分割" id="dPw-9u-UNB" customClass="LeftViewController" customModule="put_clock" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="45y-86-Dgt">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -42,7 +42,7 @@
                                 <rect key="frame" x="502" y="144.5" width="502" height="603.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="eventCell" textLabel="rfU-WD-jWM" detailTextLabel="CVh-Ik-4JO" rowHeight="150" style="IBUITableViewCellStyleSubtitle" id="Dqm-oX-XfJ">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="eventCell" textLabel="rfU-WD-jWM" detailTextLabel="CVh-Ik-4JO" rowHeight="150" style="IBUITableViewCellStyleSubtitle" id="Dqm-oX-XfJ">
                                         <rect key="frame" x="0.0" y="28" width="502" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Dqm-oX-XfJ" id="9Wr-ec-wKU">
@@ -159,7 +159,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Check" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ceN-Qe-u99">
-                                                    <rect key="frame" x="694" y="11" width="49" height="20"/>
+                                                    <rect key="frame" x="950" y="11" width="49" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -189,7 +189,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z17-tH-gjj">
-                                                    <rect key="frame" x="704" y="6" width="51" height="31"/>
+                                                    <rect key="frame" x="960" y="6" width="51" height="31"/>
                                                 </switch>
                                             </subviews>
                                             <color key="backgroundColor" name="color0/day3"/>
@@ -255,7 +255,7 @@
         <!--View Controller-->
         <scene sceneID="pT5-wn-20w">
             <objects>
-                <viewController storyboardIdentifier="View" id="0mF-VG-hne" customClass="ViewController" customModule="put_clock" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="スタンダード" id="0mF-VG-hne" customClass="ViewController" customModule="put_clock" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fyJ-NY-yJ9">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -346,7 +346,7 @@
         <!--Only View Controller-->
         <scene sceneID="rpe-uo-FSQ">
             <objects>
-                <viewController storyboardIdentifier="Only" id="YxL-rR-1f5" customClass="onlyViewController" customModule="put_clock" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="シンプル" id="YxL-rR-1f5" customClass="onlyViewController" customModule="put_clock" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="r73-4V-7Cn">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -424,20 +424,11 @@
         <namedColor name="color0/day1">
             <color red="0.22352941179999999" green="0.24313725489999999" blue="0.27450980390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="color0/day1">
-            <color red="0.22352941176470589" green="0.24313725490196078" blue="0.27450980392156865" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="color0/day2">
             <color red="0.0" green="0.67843137254901964" blue="0.70980392156862748" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="color0/day2">
-            <color red="0.0" green="0.67843137249999996" blue="0.70980392160000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="color0/day3">
             <color red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="color0/day3">
-            <color red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
