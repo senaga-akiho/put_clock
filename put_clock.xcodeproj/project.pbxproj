@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		965C36341FCCF27700926119 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965C36331FCCF27700926119 /* SwitchTableViewCell.swift */; };
+		96693D3E202989140037FDE7 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96693D3A202989130037FDE7 /* TwitterKit.framework */; };
+		96693D3F202989140037FDE7 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 96693D3B202989130037FDE7 /* TwitterKitResources.bundle */; };
+		96693D40202989140037FDE7 /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96693D3C202989140037FDE7 /* TwitterCore.framework */; };
+		96693D41202989140037FDE7 /* TwitterShareExtensionUIResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 96693D3D202989140037FDE7 /* TwitterShareExtensionUIResources.bundle */; };
 		968920131F9F405800484F22 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968920121F9F405800484F22 /* AppDelegate.swift */; };
 		968920151F9F405800484F22 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968920141F9F405800484F22 /* ViewController.swift */; };
 		968920181F9F405800484F22 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 968920161F9F405800484F22 /* Main.storyboard */; };
@@ -43,6 +47,10 @@
 
 /* Begin PBXFileReference section */
 		965C36331FCCF27700926119 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
+		96693D3A202989130037FDE7 /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = "<group>"; };
+		96693D3B202989130037FDE7 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TwitterKitResources.bundle; sourceTree = "<group>"; };
+		96693D3C202989140037FDE7 /* TwitterCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterCore.framework; sourceTree = "<group>"; };
+		96693D3D202989140037FDE7 /* TwitterShareExtensionUIResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TwitterShareExtensionUIResources.bundle; sourceTree = "<group>"; };
 		9689200F1F9F405800484F22 /* put_clock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = put_clock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		968920121F9F405800484F22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		968920141F9F405800484F22 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -70,6 +78,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96693D3E202989140037FDE7 /* TwitterKit.framework in Frameworks */,
+				96693D40202989140037FDE7 /* TwitterCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,6 +103,10 @@
 		968920061F9F405700484F22 = {
 			isa = PBXGroup;
 			children = (
+				96693D3C202989140037FDE7 /* TwitterCore.framework */,
+				96693D3A202989130037FDE7 /* TwitterKit.framework */,
+				96693D3B202989130037FDE7 /* TwitterKitResources.bundle */,
+				96693D3D202989140037FDE7 /* TwitterShareExtensionUIResources.bundle */,
 				968920111F9F405800484F22 /* put_clock */,
 				968920261F9F405800484F22 /* put_clockTests */,
 				968920311F9F405800484F22 /* put_clockUITests */,
@@ -256,9 +270,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96693D3F202989140037FDE7 /* TwitterKitResources.bundle in Resources */,
 				9689201D1F9F405800484F22 /* LaunchScreen.storyboard in Resources */,
 				9689201A1F9F405800484F22 /* Assets.xcassets in Resources */,
 				968920181F9F405800484F22 /* Main.storyboard in Resources */,
+				96693D41202989140037FDE7 /* TwitterShareExtensionUIResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -459,10 +475,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-                DEVELOPMENT_TEAM = 4U6NTUN735;
+				DEVELOPMENT_TEAM = 4U6NTUN735;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = put_clock/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-                PRODUCT_BUNDLE_IDENTIFIER = "table-clock.put-clock";
+				PRODUCT_BUNDLE_IDENTIFIER = "table-clock.put-clock";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -474,10 +494,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-                DEVELOPMENT_TEAM = 4U6NTUN735;
+				DEVELOPMENT_TEAM = 4U6NTUN735;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = put_clock/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-                PRODUCT_BUNDLE_IDENTIFIER = "table-clock.put-clock";
+				PRODUCT_BUNDLE_IDENTIFIER = "table-clock.put-clock";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
