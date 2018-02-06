@@ -6,10 +6,12 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     @IBOutlet weak var time_label: UILabel!
     @IBOutlet weak var date_label: UILabel!
     @IBOutlet weak var table: UITableView!
+     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var half_label: UILabel!
     var labelArray = [UILabel(), UILabel(), UILabel()]
     private let myEventStore:EKEventStore = EKEventStore()
+    var タイムライン取得:TWGetHomeTL = TWGetHomeTL()
     // NSUserDefaultsインスタンスの生成
     let s = 設定管理()
     
@@ -21,6 +23,10 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
         accessApplication()
+        tableView.delegate = self as UITableViewDelegate
+        tableView.dataSource = self as UITableViewDataSource
+        table.delegate = self as UITableViewDelegate
+        table.dataSource = self as UITableViewDataSource
         
         manage🖍.mainColorItem = [time_label,half_label,date_label]
         manage🖍.subColorItem = []
@@ -115,11 +121,15 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // 一定間隔で実行
-        let time2 = Timer.scheduledTimer(timeInterval: 30, target: self, selector: #selector(Table_Reload), userInfo: nil, repeats: true)
+        let time2 = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(Table_Reload), userInfo: nil, repeats: true)
         // 1秒ごとに「displayClock」を実行する
         let timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(displayClock), userInfo: nil, repeats: true)
         timer.fire()    // 無くても動くけどこれが無いと初回の実行がラグる
         time2.fire()
+        DispatchQueue.main.async {
+            self.タイムライン取得.twConect(TLcount:"10")
+            self.tableView.reloadData()
+        }
         if (s.設定[.カレンダーイベントを非表示にする]?.設定値)!{
             table.alpha = 0
         }
@@ -136,49 +146,75 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     @objc func Table_Reload(){
         table.reloadData()
+        tableView.reloadData()
     }
-    func tableView(_ table: UITableView,
+    // セルの高さ指定をする処理
+    func tableView(_ tableFunc: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        // UITableViewCellの高さを自動で取得する値
+        return UITableViewAutomaticDimension
+    }
+    func tableView(_ tableFunc: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
-        print("テーブルの更新ですよ")
-        // イベントストアのインスタンスメソッドで述語を生成.
-        var predicate = NSPredicate()
-        predicate = myEventStore.predicateForEvents(withStart: Date(),
-                                                    end: Date()+60*60*24,
-                                                    calendars: nil)
-        // 述語にマッチする全てのイベントをフェッチ.
-        let events = myEventStore.events(matching: predicate)
-        return events.count
+        if tableFunc.tag == 1 {
+            print("テーブルの更新ですよ")
+            // イベントストアのインスタンスメソッドで述語を生成.
+            var predicate = NSPredicate()
+            predicate = myEventStore.predicateForEvents(withStart: Date(),
+                                                        end: Date()+60*60*24,
+                                                        calendars: nil)
+            // 述語にマッチする全てのイベントをフェッチ.
+            let events = myEventStore.events(matching: predicate)
+            return events.count
+        } else {
+            // tweetsの配列内の要素数分を指定]
+            if(self.タイムライン取得.tweets == nil){
+                return 0
+            }
+            print("タイムライン取得")
+            print(self.タイムライン取得.tweets.count)
+            return self.タイムライン取得.tweets.count
+            
+        }
     }
     
-    func tableView(_ table: UITableView,
+    func tableView(_ tableFunc: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("テーブルの更新ですよ2")
-        // イベントストアのインスタンスメソッドで述語を生成.
-        var predicate = NSPredicate()
-        predicate = myEventStore.predicateForEvents(withStart: Date(),
-                                                    end: Date()+60*60*24,
-                                                    calendars: nil)
-        // 述語にマッチする全てのイベントをフェッチ.
-        let events = myEventStore.events(matching: predicate)
-        // tableCell の ID で UITableViewCell のインスタンスを生成
-        let cell = table.dequeueReusableCell(withIdentifier: "eventCell",
-                                             for: indexPath)
-        if !events.isEmpty {
-            cell.textLabel?.text = events[indexPath.row].title
+        if tableFunc.tag == 1 {
+            print("イヴェントの取得")
+            // イベントストアのインスタンスメソッドで述語を生成.
+            var predicate = NSPredicate()
+            predicate = myEventStore.predicateForEvents(withStart: Date(),
+                                                        end: Date()+60*60*24,
+                                                        calendars: nil)
+            // 述語にマッチする全てのイベントをフェッチ.
+            let events = myEventStore.events(matching: predicate)
+            // tableCell の ID で UITableViewCell のインスタンスを生成
+            let cell = table.dequeueReusableCell(withIdentifier: "eventCell",
+                                                 for: indexPath)
+            if !events.isEmpty {
+                cell.textLabel?.text = events[indexPath.row].title
             
-            //        print(events[indexPath.row].startDate)
-            let DateUtils = DateFormatter()
-            DateUtils.dateFormat = "HH:mm"
-            let displayTime = DateUtils.string(from: events[indexPath.row].startDate)
-            cell.detailTextLabel?.text = displayTime
-            cell.textLabel?.textColor = UIColor(named: "color2/day1")
+                //        print(events[indexPath.row].startDate)
+                let DateUtils = DateFormatter()
+                DateUtils.dateFormat = "HH:mm"
+                let displayTime = DateUtils.string(from: events[indexPath.row].startDate)
+                cell.detailTextLabel?.text = displayTime
             
-            let testDraw = draw(frame: CGRect(x: 0, y: 0,width: 1000, height: 1000))
-            cell.addSubview(testDraw)
-            testDraw.isOpaque = false
+                let testDraw = draw(frame: CGRect(x: 0, y: 0,width: 1000, height: 1000))
+                cell.addSubview(testDraw)
+                testDraw.isOpaque = false
+                return cell
+            }
+            return cell
+        } else {
+            print("タイムライン取得")
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TweetTableViewCell") as! TweetTableViewCell
+            
+            // TweetTableViewCellの描画内容となるtweetを渡す
+            cell.fill(tweet: (self.タイムライン取得.tweets[indexPath.row]))
+            
             return cell
         }
-        return cell
     }
     
     @objc func screenBrightnessDidChange(_ notification: Notification) {
