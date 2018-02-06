@@ -121,7 +121,7 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // 一定間隔で実行
-        let time2 = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(Table_Reload), userInfo: nil, repeats: true)
+        let time2 = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(Table_Reload), userInfo: nil, repeats: true)
         // 1秒ごとに「displayClock」を実行する
         let timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(displayClock), userInfo: nil, repeats: true)
         timer.fire()    // 無くても動くけどこれが無いと初回の実行がラグる
@@ -156,7 +156,6 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     func tableView(_ tableFunc: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
         if tableFunc.tag == 1 {
-            print("テーブルの更新ですよ")
             // イベントストアのインスタンスメソッドで述語を生成.
             var predicate = NSPredicate()
             predicate = myEventStore.predicateForEvents(withStart: Date(),
@@ -170,7 +169,6 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             if(self.タイムライン取得.tweets == nil){
                 return 0
             }
-            print("タイムライン取得")
             print(self.タイムライン取得.tweets.count)
             return self.タイムライン取得.tweets.count
             
@@ -180,7 +178,6 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     func tableView(_ tableFunc: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableFunc.tag == 1 {
-            print("イヴェントの取得")
             // イベントストアのインスタンスメソッドで述語を生成.
             var predicate = NSPredicate()
             predicate = myEventStore.predicateForEvents(withStart: Date(),
@@ -207,7 +204,6 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             }
             return cell
         } else {
-            print("タイムライン取得")
             let cell = tableView.dequeueReusableCell(withIdentifier: "TweetTableViewCell") as! TweetTableViewCell
             
             // TweetTableViewCellの描画内容となるtweetを渡す
