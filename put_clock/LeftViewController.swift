@@ -192,10 +192,60 @@ class LeftViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                 cell.textLabel?.text = events[indexPath.row].title
             
                 //        print(events[indexPath.row].startDate)
+//                let DateUtils = DateFormatter()
+//                DateUtils.dateFormat = "HH:mm"
+//                let displayTime = DateUtils.string(from: events[indexPath.row].startDate)
+//                cell.detailTextLabel?.text = displayTime
+                
+                //ここから変更２４時間表示の設定--------------------要修正長すぎる気がする？
                 let DateUtils = DateFormatter()
-                DateUtils.dateFormat = "HH:mm"
-                let displayTime = DateUtils.string(from: events[indexPath.row].startDate)
-                cell.detailTextLabel?.text = displayTime
+                if(s.設定[.日本語表示にする]?.設定値 == true){
+                    DateUtils.dateFormat = "H時mm分"
+                }else{
+                    DateUtils.dateFormat = "H:mm"
+                }
+                // 時間を表示
+                var displayTime = DateUtils.string(from: events[indexPath.row].startDate)    // Date()だけで現在時刻を表す
+                //判定する為の時間
+                let judgFormatter = DateFormatter()
+                judgFormatter.dateFormat = "HH:mm"
+                var judgTime = judgFormatter.string(from: events[indexPath.row].startDate)    // Date()だけで現在時刻を表す
+                //24時間表示か確認
+                if(s.設定[.二十四時間表示にする]?.設定値 == false){
+                    if(s.設定[.日本語表示にする]?.設定値 == true){
+                        DateUtils.dateFormat = "午前 H時mm分"
+                    }else if(s.設定[.日本語表示にする]?.設定値 == false){
+                        DateUtils.dateFormat = "'AM' H:mm"
+                    }
+                    displayTime = DateUtils.string(from: events[indexPath.row].startDate)
+                    if let one_time = Int(judgTime.substring(to: judgTime.index(judgTime.startIndex, offsetBy: 2))) {
+                        if(Int(judgTime.substring(to: judgTime.index(judgTime.startIndex, offsetBy: 2)))! > 12) {
+                            
+                            if(s.設定[.日本語表示にする]?.設定値 == true){
+                                DateUtils.dateFormat = "午後 H時mm分"
+                            }else if(s.設定[.日本語表示にする]?.設定値 == false){
+                                DateUtils.dateFormat = "'PM' H:mm"
+                            }
+                            displayTime = DateUtils.string(from: events[indexPath.row].startDate-60*60*12)
+                        }
+                    } else {
+                    }
+                }
+                judgFormatter.dateFormat = "dd"
+                judgTime = judgFormatter.string(from: events[indexPath.row].startDate)    // Date()だけで現在時刻を表す
+                let judgDayFormatter = DateFormatter()
+                judgDayFormatter.dateFormat = "dd"
+                let judgDay = judgFormatter.string(from: Date())    // Date()だけで現在時刻を表す
+                var str1:String = ""
+                if(judgTime != judgDay) {
+                    if(s.設定[.日本語表示にする]?.設定値 == true){
+                        str1 = "明日"
+                    }else if(s.設定[.日本語表示にする]?.設定値 == false){
+                        str1 = "tomorrow"
+                    }
+                }
+                cell.detailTextLabel?.text = str1+displayTime
+                //ここまで２４時間表示かの設定-------------------------------------------------
             
                 let testDraw = draw(frame: CGRect(x: 0, y: 0,width: 1000, height: 1000))
                 cell.addSubview(testDraw)

@@ -135,10 +135,59 @@ class ViewController: UIViewController {
             for i in events{
                 if(w==0){
                     Ename_label.text=i.title
+//                    let DateUtils = DateFormatter()
+//                    DateUtils.dateFormat = "HH:mm"
+//                    let displayTime = DateUtils.string(from: i.startDate)
+                    //ここから変更２４時間表示
+                    //判定する為の時間
+                    let judgFormatter = DateFormatter()
+                    judgFormatter.dateFormat = "HH:mm"
+                    var judgTime = judgFormatter.string(from: i.startDate)
+                    //
                     let DateUtils = DateFormatter()
-                    DateUtils.dateFormat = "HH:mm"
-                    let displayTime = DateUtils.string(from: i.startDate)
-                    Etime_label.text=displayTime
+                    if(s.設定[.日本語表示にする]?.設定値 == true){
+                        DateUtils.dateFormat = "H時mm分"
+                    }else{
+                        DateUtils.dateFormat = "H:mm"
+                    }
+                    // 時間を表示
+                    var displayTime = DateUtils.string(from: i.startDate)
+                    //24時間表示か確認
+                    if(s.設定[.二十四時間表示にする]?.設定値 == false){
+                        if(s.設定[.日本語表示にする]?.設定値 == true){
+                            DateUtils.dateFormat = "午前 H時mm分"
+                        }else if(s.設定[.日本語表示にする]?.設定値 == false){
+                            DateUtils.dateFormat = "'AM' H:mm"
+                        }
+                        displayTime = DateUtils.string(from: i.startDate)
+                        if let one_time = Int(judgTime.substring(to: judgTime.index(judgTime.startIndex, offsetBy: 2))) {
+                            if(Int(judgTime.substring(to: judgTime.index(judgTime.startIndex, offsetBy: 2)))! > 12) {
+                                
+                                if(s.設定[.日本語表示にする]?.設定値 == true){
+                                    DateUtils.dateFormat = "午後 H時mm分"
+                                }else if(s.設定[.日本語表示にする]?.設定値 == false){
+                                    DateUtils.dateFormat = "'PM' H:mm"
+                                }
+                                displayTime = DateUtils.string(from: i.startDate-60*60*12)
+                            }
+                        } else {
+                            print("変換できません")
+                        }
+                    }
+                    judgFormatter.dateFormat = "dd"
+                    judgTime = judgFormatter.string(from: i.startDate)    // Date()だけで現在時刻を表す
+                    let judgDayFormatter = DateFormatter()
+                    judgDayFormatter.dateFormat = "dd"
+                    let judgDay = judgFormatter.string(from: Date())    // Date()だけで現在時刻を表す
+                    var str1:String = ""
+                    if(judgTime != judgDay) {
+                        if(s.設定[.日本語表示にする]?.設定値 == true){
+                            str1 = "明日"
+                        }else if(s.設定[.日本語表示にする]?.設定値 == false){
+                            str1 = "tomorrow"
+                        }
+                    }
+                    Etime_label.text=str1+displayTime
                     w=w+1
                 }
             }
